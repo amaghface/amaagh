@@ -28,7 +28,6 @@
             padding: 0;
         }
         
-        /* هدر با لوگوی استاندارد */
         .navbar {
             background-color: var(--light) !important;
             border-bottom: 3px solid var(--secondary);
@@ -54,7 +53,6 @@
             color: var(--secondary) !important;
         }
         
-        /* بنر ثابت */
         .hero-banner {
             background: url('https://uploadkon.ir/uploads/520820_25new-slide.jpg') no-repeat center center;
             background-size: cover;
@@ -63,7 +61,6 @@
             position: relative;
         }
         
-        /* بخش درباره ما */
         .about-section {
             padding: 70px 0;
             background-color: var(--light);
@@ -81,13 +78,9 @@
         .about-content {
             text-align: justify;
             line-height: 2;
+            white-space: pre-line;
         }
         
-        .about-content p {
-            margin-bottom: 25px;
-        }
-        
-        /* فرم با پس‌زمینه رنگ سازمانی */
         .form-section {
             padding: 70px 0;
             background-color: #f8f7e8;
@@ -168,7 +161,6 @@
             display: block;
         }
         
-        /* فرم جمع و جور */
         .form-row {
             display: flex;
             gap: 12px;
@@ -190,7 +182,6 @@
             line-height: 1.6;
         }
         
-        /* دکمه شناور */
         .floating-btn {
             position: fixed;
             bottom: 30px;
@@ -226,8 +217,7 @@
             border-color: #69532e;
         }
         
-        /* استایل‌های فرم موفق */
-        .form-success {
+        .success-message {
             display: none;
             background: #d4edda;
             border: 1px solid #c3e6cb;
@@ -236,8 +226,9 @@
             border-radius: 8px;
             margin-bottom: 20px;
             text-align: center;
+            font-weight: bold;
         }
-        
+
         @media (max-width: 768px) {
             .hero-banner {
                 min-height: 250px;
@@ -292,12 +283,8 @@
     </style>
 </head>
 <body>
-    <!-- دکمه شناور -->
-    <a href="#form" class="floating-btn">
-        ثبت درخواست بررسی اثر
-    </a>
+    <a href="#form" class="floating-btn">ثبت درخواست بررسی اثر</a>
 
-    <!-- هدر -->
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand" href="#">
@@ -316,44 +303,40 @@
         </div>
     </nav>
 
-    <!-- بنر ثابت -->
     <section class="hero-banner"></section>
 
-    <!-- درباره نشر -->
     <section class="about-section">
         <div class="container">
             <h2 class="section-title text-center">اگر از اعماق بازمی‌گردید</h2>
             <div class="row">
                 <div class="col-lg-8 mx-auto">
-                    <div class="about-content">
-                        <p>نشر اعماق با هدف انتشار آثار فاخر ادبی و فرهنگی تأسیس شده است. ما بر این باوریم که هر کتاب، دریچه‌ای به سوی دنیایی جدید است و هر نویسنده، راوی روایتی منحصربه‌فرد.</p>
-                        
-                        <p>ماموریت ما شناسایی، پرورش و انتشار استعدادهای نوظهور در عرصه نویسندگی است. تیم متخصص ما متشکل از Editors باتجربه، مترجمان زبده و متخصصان نشر، همراهی مطمئن برای نویسندگان در تمام مراحل چاپ و انتشار اثرشان هستند.</p>
-                        
-                        <p>کیفیت محتوای آثار، طراحی جذاب و استانداردهای حرفه‌ای نشر، سه رکن اصلی فعالیت‌های ما محسوب می‌شوند. ما افتخار همکاری با ده‌ها نویسنده توانا را داشته و بیش از صد عنوان کتاب ارزشمند را به جامعه فرهنگی کشور عرضه کرده‌ایم.</p>
-                        
-                        <p>اگر شما نیز صاحب اثری ادبی، علمی یا فرهنگی هستید، مشتاقانه منتظر همکاری با شما هستیم. تیم نشر اعماق با کمال میل اثر شما را بررسی کرده و در تمام مراحل آماده‌سازی، چاپ و توزیع، همراهتان خواهد بود.</p>
+                    <div class="about-content" id="aboutText">
+نشر اعماق با هدف انتشار آثار فاخر ادبی و فرهنگی تأسیس شده است. ما بر این باوریم که هر کتاب، دریچه‌ای به سوی دنیایی جدید است و هر نویسنده، راوی روایتی منحصربه‌فرد.
+
+ماموریت ما شناسایی، پرورش و انتشار استعدادهای نوظهور در عرصه نویسندگی است. تیم متخصص ما متشکل از Editors باتجربه، مترجمان زبده و متخصصان نشر، همراهی مطمئن برای نویسندگان در تمام مراحل چاپ و انتشار اثرشان هستند.
+
+کیفیت محتوای آثار، طراحی جذاب و استانداردهای حرفه‌ای نشر، سه رکن اصلی فعالیت‌های ما محسوب می‌شوند. ما افتخار همکاری با ده‌ها نویسنده توانا را داشته و بیش از صد عنوان کتاب ارزشمند را به جامعه فرهنگی کشور عرضه کرده‌ایم.
+
+اگر شما نیز صاحب اثری ادبی، علمی یا فرهنگی هستید، مشتاقانه منتظر همکاری با شما هستیم. تیم نشر اعماق با کمال میل اثر شما را بررسی کرده و در تمام مراحل آماده‌سازی، چاپ و توزیع، همراهتان خواهد بود.
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- فرم درخواست -->
     <section id="form" class="form-section">
         <div class="form-container">
             <h2 class="section-title text-center">فرم ثبت درخواست بررسی اثر</h2>
             <p class="text-center mb-4">از طریق این فرم اطلاعات درخواستی را ثبت کنید تا در اولین فرصت با شما تماس برقرار کنیم.</p>
             
-            <div class="form-success" id="successMessage">
-                <i class="fas fa-check-circle"></i> درخواست شما با موفقیت ثبت شد. به زودی با شما تماس خواهیم گرفت.
+            <div class="success-message" id="successMessage">
+                <i class="fas fa-check-circle"></i> درخواست شما با موفقیت ارسال شد
             </div>
             
             <form action="https://formsubmit.co/amagh.pub@gmail.com" method="POST" enctype="multipart/form-data" id="submissionForm">
                 <input type="hidden" name="_subject" value="درخواست جدید بررسی اثر - نشر اعماق">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="_next" value="https://amaghface.github.io/amaagh/">
                 
                 <div class="form-row">
                     <div class="form-group">
@@ -404,10 +387,8 @@
         </div>
     </section>
 
-    <!-- فوتر -->
     <footer class="footer">
         <div class="container">
-            <!-- کادر متنی justify بالای لوگوها -->
             <div class="footer-text-box">
                 <p>نشر اعماق با بیش از یک دهه تجربه در حوزه چاپ و انتشار کتاب، مفتخر است که میزبان استعدادهای درخشان ادبی کشور باشد. ما با تیمی متشکل از Editors باتجربه، مترجمان متخصص و کارشناسان نشر، همراهی مطمئن برای نویسندگان در تمام مراحل چاپ و انتشار اثرشان هستیم. کیفیت محتوای آثار، طراحی جذاب و استانداردهای حرفه‌ای نشر، سه رکن اصلی فعالیت‌های ما محسوب می‌شوند.</p>
             </div>
@@ -436,7 +417,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // مدیریت نمایش اطلاعات فایل
-        document.getElementById('bookFile').addEventListener('change', function(e) {
+        document.querySelector('input[type="file"]').addEventListener('change', function(e) {
             const fileInfo = document.getElementById('fileInfo');
             const file = e.target.files[0];
             
@@ -474,16 +455,9 @@
                 e.preventDefault();
                 alert('لطفاً بخش‌های ستاره‌دار را پر کنید.');
             } else {
-                // نمایش وضعیت ارسال
-                const originalText = submitBtn.innerHTML;
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال ارسال...';
-                
-                // نمایش پیام موفقیت بعد از ارسال
-                setTimeout(() => {
-                    successMessage.style.display = 'block';
-                    successMessage.scrollIntoView({ behavior: 'smooth' });
-                }, 1000);
+                // نمایش پیام موفقیت
+                successMessage.style.display = 'block';
+                successMessage.scrollIntoView({ behavior: 'smooth' });
             }
         });
     </script>
