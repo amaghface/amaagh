@@ -349,42 +349,47 @@
                 <i class="fas fa-check-circle"></i> درخواست شما با موفقیت ثبت شد. به زودی با شما تماس خواهیم گرفت.
             </div>
             
-            <form id="submissionForm">
+            <form action="https://formsubmit.co/amagh.pub@gmail.com" method="POST" enctype="multipart/form-data" id="submissionForm">
+                <input type="hidden" name="_subject" value="درخواست جدید بررسی اثر - نشر اعماق">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_next" value="https://amaghface.github.io/amaagh/">
+                
                 <div class="form-row">
                     <div class="form-group">
                         <label class="form-label required">نام و نام خانوادگی</label>
-                        <input type="text" class="form-control" id="fullName" required>
+                        <input type="text" class="form-control" name="نام و نام خانوادگی" required>
                     </div>
                     <div class="form-group">
                         <label class="form-label required">نام کتاب</label>
-                        <input type="text" class="form-control" id="bookName" required>
+                        <input type="text" class="form-control" name="نام کتاب" required>
                     </div>
                 </div>
                 
                 <div class="form-group">
                     <label class="form-label required">موضوع کتاب</label>
-                    <input type="text" class="form-control" id="bookSubject" required>
+                    <input type="text" class="form-control" name="موضوع کتاب" required>
                 </div>
                 
                 <div class="form-group">
                     <label class="form-label">توضیح کوتاه درمورد کتاب</label>
-                    <textarea class="form-control" id="bookDescription" rows="3"></textarea>
+                    <textarea class="form-control" name="توضیحات کتاب" rows="3"></textarea>
                 </div>
                 
                 <div class="form-row">
                     <div class="form-group">
                         <label class="form-label">شماره تماس واتساپی <span class="form-note">(جلسه آنلاین)</span></label>
-                        <input type="tel" class="form-control" id="whatsappNumber">
+                        <input type="tel" class="form-control" name="شماره تماس">
                     </div>
                     <div class="form-group">
                         <label class="form-label required">ایمیل <span class="form-note">(جهت برگزاری جلسه آنلاین در Google Meet)</span></label>
-                        <input type="email" class="form-control" id="email" required>
+                        <input type="email" class="form-control" name="ایمیل" required>
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label">بارگذاری فایل <span class="form-note">(حداکثر 10 مگابایت)</span></label>
-                    <input type="file" class="form-control" id="bookFile" accept=".pdf,.doc,.docx">
+                    <label class="form-label">بارگذاری فایل <span class="form-note">(حداکثر 20 مگابایت - فرمت‌های PDF, Word)</span></label>
+                    <input type="file" class="form-control" name="فایل پیوستی" accept=".pdf,.doc,.docx">
                     <div class="file-info" id="fileInfo"></div>
                     
                     <small class="text-muted form-note">درصورت تمایل برای پیشرفت سریع‌تر در فرآیند بررسی کتاب، می‌توانید چند صفحه از متن کتاب را بارگذاری کنید.</small>
@@ -437,8 +442,8 @@
             
             if (file) {
                 const fileSize = (file.size / (1024 * 1024)).toFixed(2);
-                if (fileSize > 10) {
-                    fileInfo.innerHTML = '<span style="color: red;">حجم فایل نباید بیشتر از 10 مگابایت باشد</span>';
+                if (fileSize > 20) {
+                    fileInfo.innerHTML = '<span style="color: red;">حجم فایل نباید بیشتر از 20 مگابایت باشد</span>';
                     this.value = '';
                 } else {
                     fileInfo.innerHTML = `فایل انتخاب شده: ${file.name} (${fileSize} MB)`;
@@ -450,8 +455,6 @@
 
         // مدیریت فرم
         document.getElementById('submissionForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
             const submitBtn = document.getElementById('submitBtn');
             const successMessage = document.getElementById('successMessage');
             const requiredFields = this.querySelectorAll('[required]');
@@ -467,33 +470,20 @@
                 }
             });
             
-            if (valid) {
+            if (!valid) {
+                e.preventDefault();
+                alert('لطفاً بخش‌های ستاره‌دار را پر کنید.');
+            } else {
                 // نمایش وضعیت ارسال
                 const originalText = submitBtn.innerHTML;
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال ارسال...';
                 
-                // شبیه‌سازی ارسال فرم
+                // نمایش پیام موفقیت بعد از ارسال
                 setTimeout(() => {
-                    // نمایش پیام موفقیت
                     successMessage.style.display = 'block';
-                    
-                    // اسکرول به پیام موفقیت
                     successMessage.scrollIntoView({ behavior: 'smooth' });
-                    
-                    // بازنشانی فرم
-                    this.reset();
-                    document.getElementById('fileInfo').innerHTML = '';
-                    
-                    // بازگرداندن دکمه به حالت اول
-                    setTimeout(() => {
-                        submitBtn.disabled = false;
-                        submitBtn.innerHTML = originalText;
-                    }, 2000);
-                    
-                }, 1500);
-            } else {
-                alert('لطفاً بخش‌های ستاره‌دار را پر کنید.');
+                }, 1000);
             }
         });
     </script>
