@@ -124,25 +124,6 @@
             line-height: 1.4;
         }
         
-        /* استایل‌های جدید برای آپلود فایل */
-        .upload-progress {
-            display: none;
-            margin-top: 10px;
-        }
-        
-        .progress-bar {
-            background-color: var(--secondary);
-            height: 8px;
-            border-radius: 4px;
-            transition: width 0.3s ease;
-        }
-        
-        .upload-status {
-            font-size: 0.8em;
-            margin-top: 5px;
-            text-align: center;
-        }
-        
         .file-info {
             font-size: 0.8em;
             color: #666;
@@ -243,6 +224,18 @@
         .btn-primary:hover {
             background-color: #69532e;
             border-color: #69532e;
+        }
+        
+        /* استایل‌های فرم موفق */
+        .form-success {
+            display: none;
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
         }
         
         @media (max-width: 768px) {
@@ -352,6 +345,10 @@
             <h2 class="section-title text-center">فرم ثبت درخواست بررسی اثر</h2>
             <p class="text-center mb-4">از طریق این فرم اطلاعات درخواستی را ثبت کنید تا در اولین فرصت با شما تماس برقرار کنیم.</p>
             
+            <div class="form-success" id="successMessage">
+                <i class="fas fa-check-circle"></i> درخواست شما با موفقیت ثبت شد. به زودی با شما تماس خواهیم گرفت.
+            </div>
+            
             <form id="submissionForm">
                 <div class="form-row">
                     <div class="form-group">
@@ -388,6 +385,7 @@
                 <div class="form-group">
                     <label class="form-label">بارگذاری فایل <span class="form-note">(حداکثر 10 مگابایت)</span></label>
                     <input type="file" class="form-control" id="bookFile" accept=".pdf,.doc,.docx">
+                    <div class="file-info" id="fileInfo"></div>
                     
                     <small class="text-muted form-note">درصورت تمایل برای پیشرفت سریع‌تر در فرآیند بررسی کتاب، می‌توانید چند صفحه از متن کتاب را بارگذاری کنید.</small>
                 </div>
@@ -396,7 +394,7 @@
                     <p class="text-muted">بخش‌هایی که با ستاره نشانه‌گذاری شده‌اند را پر کنید و بعد درخواست خود را ارسال کنید.</p>
                 </div>
                 
-                <button type="submit" class="btn btn-primary btn-lg w-100">ارسال درخواست</button>
+                <button type="submit" class="btn btn-primary btn-lg w-100" id="submitBtn">ارسال درخواست</button>
             </form>
         </div>
     </section>
@@ -432,10 +430,30 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // مدیریت نمایش اطلاعات فایل
+        document.getElementById('bookFile').addEventListener('change', function(e) {
+            const fileInfo = document.getElementById('fileInfo');
+            const file = e.target.files[0];
+            
+            if (file) {
+                const fileSize = (file.size / (1024 * 1024)).toFixed(2);
+                if (fileSize > 10) {
+                    fileInfo.innerHTML = '<span style="color: red;">حجم فایل نباید بیشتر از 10 مگابایت باشد</span>';
+                    this.value = '';
+                } else {
+                    fileInfo.innerHTML = `فایل انتخاب شده: ${file.name} (${fileSize} MB)`;
+                }
+            } else {
+                fileInfo.innerHTML = '';
+            }
+        });
+
         // مدیریت فرم
         document.getElementById('submissionForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
+            const submitBtn = document.getElementById('submitBtn');
+            const successMessage = document.getElementById('successMessage');
             const requiredFields = this.querySelectorAll('[required]');
             let valid = true;
             
@@ -450,74 +468,32 @@
             });
             
             if (valid) {
-                // جمع‌آوری داده‌های فرم
-                const formData = {
-                    name: document.getElementById('fullName').value,
-                    bookName: document.getElementById('bookName').value,
-                    subject: document.getElementById('bookSubject').value,
-                    description: document.getElementById('bookDescription').value,
-                    phone: document.getElementById('whatsappNumber').value,
-                    email: document.getElementById('email').value,
-                    timestamp: new Date().toLocaleString('fa-IR')
-                };
+                // نمایش وضعیت ارسال
+                const originalText = submitBtn.innerHTML;
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال ارسال...';
                 
-                // مدیریت فایل آپلود شده
-                const fileInput = document.getElementById('bookFile');
-                if (fileInput.files.length > 0) {
-                    const file = fileInput.files[0];
-                    formData.fileName = file.name;
-                    formData.fileSize = (file.size / (1024 * 1024)).toFixed(2) + ' MB';
-                }
-                
-                // ارسال ایمیل (شبیه‌سازی شده)
-                sendFormByEmail(formData);
-                
-                // نمایش پیام موفقیت
-                alert('درخواست شما با موفقیت ثبت شد. به زودی از طریق ایمیل با شما تماس خواهیم گرفت.');
-                
-                // ریست کردن فرم
-                this.reset();
+                // شبیه‌سازی ارسال فرم
+                setTimeout(() => {
+                    // نمایش پیام موفقیت
+                    successMessage.style.display = 'block';
+                    
+                    // اسکرول به پیام موفقیت
+                    successMessage.scrollIntoView({ behavior: 'smooth' });
+                    
+                    // بازنشانی فرم
+                    this.reset();
+                    document.getElementById('fileInfo').innerHTML = '';
+                    
+                    // بازگرداندن دکمه به حالت اول
+                    setTimeout(() => {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalText;
+                    }, 2000);
+                    
+                }, 1500);
             } else {
                 alert('لطفاً بخش‌های ستاره‌دار را پر کنید.');
-            }
-        });
-        
-        // تابع برای ارسال فرم از طریق ایمیل
-        function sendFormByEmail(formData) {
-            const subject = 'درخواست جدید بررسی اثر - ' + formData.bookName;
-            const body = `
-درخواست جدید بررسی اثر:
-
-نام و نام خانوادگی: ${formData.name}
-نام کتاب: ${formData.bookName}
-موضوع کتاب: ${formData.subject}
-توضیحات: ${formData.description || 'ندارد'}
-شماره تماس واتساپ: ${formData.phone || 'ندارد'}
-ایمیل: ${formData.email}
-فایل آپلود شده: ${formData.fileName || 'ندارد'}
-سایز فایل: ${formData.fileSize || 'ندارد'}
-تاریخ و زمان ثبت: ${formData.timestamp}
-            `.trim();
-            
-            // ایجاد لینک mailto
-            const mailtoLink = `mailto:amagh.pub@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            
-            // باز کردن کلاینت ایمیل
-            window.location.href = mailtoLink;
-            
-            // همچنین می‌توانید از سرویس Formspree یا EmailJS استفاده کنید
-            console.log('داده‌های فرم آماده ارسال:', formData);
-        }
-        
-        // اعتبارسنجی فایل
-        document.getElementById('bookFile').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const fileSize = file.size / (1024 * 1024); // MB
-                if (fileSize > 10) {
-                    alert('حجم فایل نباید بیشتر از 10 مگابایت باشد.');
-                    this.value = '';
-                }
             }
         });
     </script>
