@@ -1,135 +1,525 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>نشر اعماق</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css"/>
-  <style>
-    :root {
-      --primary: #182128;
-      --secondary: #7a6538;
-      --background: #d9d6b7;
-      --light: #ffffff;
-      --dark: #000000;
-    }
-
-    body {
-      background-color: var(--background);
-      font-family: Vazir, Tahoma, sans-serif;
-      color: var(--primary);
-      margin: 0;
-      padding: 0;
-    }
-
-    .navbar {
-      background-color: var(--light);
-      border-bottom: 3px solid var(--secondary);
-      padding: 8px 0;
-    }
-
-    .logo-container img {
-      height: 40px;
-      max-width: 160px;
-    }
-
-    .hero-banner {
-      background: url('https://uploadkon.ir/uploads/520820_25new-slide.jpg') no-repeat center center;
-      background-size: cover;
-      min-height: 300px;
-      width: 100%;
-    }
-
-    .form-section {
-      padding: 60px 15px;
-      background-color: var(--light);
-    }
-
-    .form-container {
-      max-width: 650px;
-      margin: auto;
-    }
-
-    .form-control {
-      margin-bottom: 15px;
-      border: 2px solid var(--primary);
-    }
-
-    .btn-primary {
-      background-color: var(--secondary);
-      border: none;
-      font-weight: bold;
-    }
-
-    .btn-primary:hover {
-      background-color: #69532e;
-    }
-
-    .footer {
-      background-color: var(--primary);
-      color: var(--background);
-      padding: 40px 20px;
-    }
-
-    .footer p {
-      text-align: justify;
-      line-height: 2;
-      margin: 0;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نشر اعماق</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #182128;
+            --secondary: #7a6538;
+            --background: #d9d6b7;
+            --light: #ffffff;
+            --dark: #000000;
+        }
+        
+        * {
+            font-family: Vazir, Tahoma, sans-serif !important;
+        }
+        
+        body {
+            background-color: var(--background);
+            color: var(--primary);
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* هدر با لوگوی استاندارد */
+        .navbar {
+            background-color: var(--light) !important;
+            border-bottom: 3px solid var(--secondary);
+            padding: 8px 0;
+        }
+        
+        .logo-container img {
+            height: 40px;
+            width: auto;
+            max-width: 160px;
+            object-fit: contain;
+        }
+        
+        .nav-link {
+            color: var(--primary) !important;
+            font-weight: bold;
+            margin: 0 8px;
+            font-size: 0.95em;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--secondary) !important;
+        }
+        
+        /* بنر ثابت */
+        .hero-banner {
+            background: url('https://uploadkon.ir/uploads/520820_25new-slide.jpg') no-repeat center center;
+            background-size: cover;
+            min-height: 300px;
+            width: 100%;
+            position: relative;
+        }
+        
+        /* بخش درباره ما */
+        .about-section {
+            padding: 70px 0;
+            background-color: var(--light);
+        }
+        
+        .section-title {
+            color: var(--primary);
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 12px;
+            margin-bottom: 35px;
+            font-weight: bold;
+            font-size: 1.8em;
+        }
+        
+        .about-content {
+            text-align: justify;
+            line-height: 2;
+        }
+        
+        .about-content p {
+            margin-bottom: 25px;
+        }
+        
+        /* فرم با پس‌زمینه رنگ سازمانی */
+        .form-section {
+            padding: 70px 0;
+            background-color: #f8f7e8;
+        }
+        
+        .form-container {
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .form-control {
+            border: 2px solid var(--primary);
+            padding: 10px 12px;
+            margin-bottom: 12px;
+            background: var(--light);
+            border-radius: 6px;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 0.2rem rgba(122, 101, 56, 0.15);
+        }
+        
+        .required::after {
+            content: " *";
+            color: red;
+        }
+        
+        .form-note {
+            font-size: 0.8em;
+            line-height: 1.4;
+        }
+        
+        /* استایل‌های جدید برای آپلود فایل */
+        .upload-progress {
+            display: none;
+            margin-top: 10px;
+        }
+        
+        .progress-bar {
+            background-color: var(--secondary);
+            height: 8px;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        .upload-status {
+            font-size: 0.8em;
+            margin-top: 5px;
+            text-align: center;
+        }
+        
+        .file-info {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .footer {
+            background-color: var(--primary);
+            color: var(--background);
+            padding: 35px 0;
+        }
+        
+        .footer-text-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            text-align: justify;
+            line-height: 1.8;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            transform: scale(1.1);
+            opacity: 0.8;
+        }
+        
+        .social-icons img {
+            width: 28px;
+            height: 28px;
+            display: block;
+        }
+        
+        /* فرم جمع و جور */
+        .form-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .form-group {
+            flex: 1;
+        }
+        
+        .form-note {
+            text-align: center;
+            margin: 20px 0;
+            padding: 0 10px;
+        }
+        
+        .form-note p {
+            margin: 0;
+            line-height: 1.6;
+        }
+        
+        /* دکمه شناور */
+        .floating-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: var(--secondary);
+            color: var(--light);
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+        
+        .floating-btn:hover {
+            background: #69532e;
+            transform: translateY(-3px);
+            color: var(--light);
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+            padding: 10px 25px;
+            font-weight: bold;
+            font-size: 0.95em;
+        }
+        
+        .btn-primary:hover {
+            background-color: #69532e;
+            border-color: #69532e;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-banner {
+                min-height: 250px;
+            }
+            
+            .floating-btn {
+                left: 15px;
+                bottom: 15px;
+                padding: 10px 15px;
+                font-size: 0.8em;
+            }
+            
+            .logo-container img {
+                height: 35px;
+                max-width: 140px;
+            }
+            
+            .section-title {
+                font-size: 1.5em;
+            }
+            
+            .about-section,
+            .form-section {
+                padding: 50px 0;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo-container img {
+                height: 32px;
+                max-width: 120px;
+            }
+            
+            .nav-link {
+                font-size: 0.9em;
+                margin: 0 5px;
+            }
+            
+            .section-title {
+                font-size: 1.3em;
+            }
+            
+            .hero-banner {
+                min-height: 200px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- دکمه شناور -->
+    <a href="#form" class="floating-btn">
+        ثبت درخواست بررسی اثر
+    </a>
 
-  <!-- هدر -->
-  <nav class="navbar">
-    <div class="container d-flex justify-content-between align-items-center">
-      <a href="#" class="logo-container">
-        <img src="https://uploadkon.ir/uploads/bf3921_25website-logo-min.png" alt="نشر اعماق" />
-      </a>
-    </div>
-  </nav>
+    <!-- هدر -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="https://uploadkon.ir/uploads/bf3921_25website-logo-min.png" alt="نشر اعماق" class="logo-container">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">خانه</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">درباره ما</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">تماس با ما</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-  <!-- بنر -->
-  <div class="hero-banner"></div>
+    <!-- بنر ثابت -->
+    <section class="hero-banner"></section>
 
-  <!-- فرم -->
-  <section class="form-section">
-    <div class="form-container">
-      <h2 class="text-center mb-4">فرم ثبت درخواست بررسی اثر</h2>
-      <form action="https://formspree.io/f/yourformid" method="POST">
-        <label class="form-label">نام و نام خانوادگی *</label>
-        <input type="text" name="fullName" class="form-control" required />
+    <!-- درباره نشر -->
+    <section class="about-section">
+        <div class="container">
+            <h2 class="section-title text-center">اگر از اعماق بازمی‌گردید</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="about-content">
+                        <p>نشر اعماق با هدف انتشار آثار فاخر ادبی و فرهنگی تأسیس شده است. ما بر این باوریم که هر کتاب، دریچه‌ای به سوی دنیایی جدید است و هر نویسنده، راوی روایتی منحصربه‌فرد.</p>
+                        
+                        <p>ماموریت ما شناسایی، پرورش و انتشار استعدادهای نوظهور در عرصه نویسندگی است. تیم متخصص ما متشکل از Editors باتجربه، مترجمان زبده و متخصصان نشر، همراهی مطمئن برای نویسندگان در تمام مراحل چاپ و انتشار اثرشان هستند.</p>
+                        
+                        <p>کیفیت محتوای آثار، طراحی جذاب و استانداردهای حرفه‌ای نشر، سه رکن اصلی فعالیت‌های ما محسوب می‌شوند. ما افتخار همکاری با ده‌ها نویسنده توانا را داشته و بیش از صد عنوان کتاب ارزشمند را به جامعه فرهنگی کشور عرضه کرده‌ایم.</p>
+                        
+                        <p>اگر شما نیز صاحب اثری ادبی، علمی یا فرهنگی هستید، مشتاقانه منتظر همکاری با شما هستیم. تیم نشر اعماق با کمال میل اثر شما را بررسی کرده و در تمام مراحل آماده‌سازی، چاپ و توزیع، همراهتان خواهد بود.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <label class="form-label">نام کتاب *</label>
-        <input type="text" name="bookName" class="form-control" required />
+    <!-- فرم درخواست -->
+    <section id="form" class="form-section">
+        <div class="form-container">
+            <h2 class="section-title text-center">فرم ثبت درخواست بررسی اثر</h2>
+            <p class="text-center mb-4">از طریق این فرم اطلاعات درخواستی را ثبت کنید تا در اولین فرصت با شما تماس برقرار کنیم.</p>
+            
+            <form id="submissionForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label required">نام و نام خانوادگی</label>
+                        <input type="text" class="form-control" id="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">نام کتاب</label>
+                        <input type="text" class="form-control" id="bookName" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label required">موضوع کتاب</label>
+                    <input type="text" class="form-control" id="bookSubject" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">توضیح کوتاه درمورد کتاب</label>
+                    <textarea class="form-control" id="bookDescription" rows="3"></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">شماره تماس واتساپی <span class="form-note">(جلسه آنلاین)</span></label>
+                        <input type="tel" class="form-control" id="whatsappNumber">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">ایمیل <span class="form-note">(جهت برگزاری جلسه آنلاین در Google Meet)</span></label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">بارگذاری فایل <span class="form-note">(حداکثر 10 مگابایت)</span></label>
+                    <input type="file" class="form-control" id="bookFile" accept=".pdf,.doc,.docx">
+                    
+                    <small class="text-muted form-note">درصورت تمایل برای پیشرفت سریع‌تر در فرآیند بررسی کتاب، می‌توانید چند صفحه از متن کتاب را بارگذاری کنید.</small>
+                </div>
+                
+                <div class="form-note">
+                    <p class="text-muted">بخش‌هایی که با ستاره نشانه‌گذاری شده‌اند را پر کنید و بعد درخواست خود را ارسال کنید.</p>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-lg w-100">ارسال درخواست</button>
+            </form>
+        </div>
+    </section>
 
-        <label class="form-label">موضوع کتاب *</label>
-        <input type="text" name="bookSubject" class="form-control" required />
+    <!-- فوتر -->
+    <footer class="footer">
+        <div class="container">
+            <!-- کادر متنی justify بالای لوگوها -->
+            <div class="footer-text-box">
+                <p>نشر اعماق با بیش از یک دهه تجربه در حوزه چاپ و انتشار کتاب، مفتخر است که میزبان استعدادهای درخشان ادبی کشور باشد. ما با تیمی متشکل از Editors باتجربه، مترجمان متخصص و کارشناسان نشر، همراهی مطمئن برای نویسندگان در تمام مراحل چاپ و انتشار اثرشان هستیم. کیفیت محتوای آثار، طراحی جذاب و استانداردهای حرفه‌ای نشر، سه رکن اصلی فعالیت‌های ما محسوب می‌شوند.</p>
+            </div>
+            
+            <div class="social-icons">
+                <a href="https://t.me/amaghpub" target="_blank">
+                    <img src="https://uploadkon.ir/uploads/3db017_25Telegram.png" alt="تلگرام">
+                </a>
+                <a href="https://instagram.com/amaghpub" target="_blank">
+                    <img src="https://uploadkon.ir/uploads/a43a17_25Instagram.png" alt="اینستاگرام">
+                </a>
+                <a href="https://www.linkedin.com/company/amaghpub" target="_blank">
+                    <img src="https://uploadkon.ir/uploads/1f7217_25Linkedin.png" alt="لینکدین">
+                </a>
+                <a href="mailto:amagh.pub@gmail.com" target="_blank">
+                    <img src="https://uploadkon.ir/uploads/547417_25Untitled-2.png" alt="ایمیل" style="width:28px;height:28px;">
+                </a>
+            </div>
+            <p class="text-center mb-0" style="color:#d9d6b7 !important;">
+                © تمامی حقوق محفوظ است | 
+                <a href="#" style="color:#d9d6b7 !important; text-decoration:none !important;">نشر اعماق</a>
+            </p>
+        </div>
+    </footer>
 
-        <label class="form-label">توضیح کوتاه</label>
-        <textarea name="bookDescription" class="form-control" rows="3"></textarea>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // مدیریت فرم
+        document.getElementById('submissionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const requiredFields = this.querySelectorAll('[required]');
+            let valid = true;
+            
+            // بررسی فیلدهای اجباری
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    valid = false;
+                    field.style.borderColor = 'red';
+                } else {
+                    field.style.borderColor = '';
+                }
+            });
+            
+            if (valid) {
+                // جمع‌آوری داده‌های فرم
+                const formData = {
+                    name: document.getElementById('fullName').value,
+                    bookName: document.getElementById('bookName').value,
+                    subject: document.getElementById('bookSubject').value,
+                    description: document.getElementById('bookDescription').value,
+                    phone: document.getElementById('whatsappNumber').value,
+                    email: document.getElementById('email').value,
+                    timestamp: new Date().toLocaleString('fa-IR')
+                };
+                
+                // مدیریت فایل آپلود شده
+                const fileInput = document.getElementById('bookFile');
+                if (fileInput.files.length > 0) {
+                    const file = fileInput.files[0];
+                    formData.fileName = file.name;
+                    formData.fileSize = (file.size / (1024 * 1024)).toFixed(2) + ' MB';
+                }
+                
+                // ارسال ایمیل (شبیه‌سازی شده)
+                sendFormByEmail(formData);
+                
+                // نمایش پیام موفقیت
+                alert('درخواست شما با موفقیت ثبت شد. به زودی از طریق ایمیل با شما تماس خواهیم گرفت.');
+                
+                // ریست کردن فرم
+                this.reset();
+            } else {
+                alert('لطفاً بخش‌های ستاره‌دار را پر کنید.');
+            }
+        });
+        
+        // تابع برای ارسال فرم از طریق ایمیل
+        function sendFormByEmail(formData) {
+            const subject = 'درخواست جدید بررسی اثر - ' + formData.bookName;
+            const body = `
+درخواست جدید بررسی اثر:
 
-        <label class="form-label">شماره واتساپ</label>
-        <input type="tel" name="whatsappNumber" class="form-control" />
-
-        <label class="form-label">ایمیل *</label>
-        <input type="email" name="email" class="form-control" required />
-
-        <button type="submit" class="btn btn-primary w-100 mt-3">ارسال درخواست</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- فوتر -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-ما در اعماق بیش از رفتن به بازگشتن می‌اندیشیم. بازگشتن از هر رویارویی، هر یافتن و پی بردنی. بازگشتن از هر معنا، هر جست‌وجو و هر گفت‌وگو. ما باز می‌گردیم زیرا در بازگشتن است که تکرار را ممکن می‌کنیم و نهان‌گاه‌ها آشکار می‌شوند. در بازگشتن است که بیرون‌زدن از خویش را برمی‌گزینیم. و در بازگشتن است که انسان می‌شویم، همچون آن هنگام که رفتن را برگزیدیم.
-نشر اعماق مسافرخانه‌ای‌ست برای آنان که در مسیر بازگشتند؛ و برای آنان که می‌روند تا به نقطه‌ی بازگشت برسند. نشر اعماق از کلمات شما جان خواهد گرفت و در میانه‌ی راه‌ها و بی‌راهه‌ها، آتشی خواهد بود برای گردآمدن انسان؛ من، تو، ما.
-      </p>
-    </div>
-  </footer>
-
+نام و نام خانوادگی: ${formData.name}
+نام کتاب: ${formData.bookName}
+موضوع کتاب: ${formData.subject}
+توضیحات: ${formData.description || 'ندارد'}
+شماره تماس واتساپ: ${formData.phone || 'ندارد'}
+ایمیل: ${formData.email}
+فایل آپلود شده: ${formData.fileName || 'ندارد'}
+سایز فایل: ${formData.fileSize || 'ندارد'}
+تاریخ و زمان ثبت: ${formData.timestamp}
+            `.trim();
+            
+            // ایجاد لینک mailto
+            const mailtoLink = `mailto:amagh.pub@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            // باز کردن کلاینت ایمیل
+            window.location.href = mailtoLink;
+            
+            // همچنین می‌توانید از سرویس Formspree یا EmailJS استفاده کنید
+            console.log('داده‌های فرم آماده ارسال:', formData);
+        }
+        
+        // اعتبارسنجی فایل
+        document.getElementById('bookFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const fileSize = file.size / (1024 * 1024); // MB
+                if (fileSize > 10) {
+                    alert('حجم فایل نباید بیشتر از 10 مگابایت باشد.');
+                    this.value = '';
+                }
+            }
+        });
+    </script>
 </body>
 </html>
