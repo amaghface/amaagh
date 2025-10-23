@@ -333,9 +333,11 @@
                 درخواست شما با موفقیت ارسال شد
             </div>
             
-            <form action="https://formspree.io/f/xblzvval" method="POST" enctype="multipart/form-data" id="submissionForm">
+            <form action="https://formsubmit.co/amagh.pub@gmail.com" method="POST" enctype="multipart/form-data" id="submissionForm">
                 <input type="hidden" name="_subject" value="درخواست جدید بررسی اثر - نشر اعماق">
-                <input type="hidden" name="_replyto" value="amagh.pub@gmail.com">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_next" value="https://amaghface.github.io/amaagh/#form">
                 
                 <div class="form-row">
                     <div class="form-group">
@@ -365,13 +367,13 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label required">ایمیل <span class="form-note">(جهت برگزاری جلسه آنلاین در Google Meet)</span></label>
-                        <input type="email" class="form-control" name="email" required>
+                        <input type="email" class="form-control" name="ایمیل" required>
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label">بارگذاری فایل <span class="form-note">(حداکثر 10 مگابایت - فرمت‌های PDF, Word)</span></label>
-                    <input type="file" class="form-control" name="attachment" accept=".pdf,.doc,.docx">
+                    <label class="form-label">بارگذاری فایل <span class="form-note">(حداکثر 20 مگابایت - فرمت‌های PDF, Word)</span></label>
+                    <input type="file" class="form-control" name="فایل پیوستی" accept=".pdf,.doc,.docx">
                     <div class="file-info" id="fileInfo"></div>
                     
                     <small class="text-muted form-note">درصورت تمایل برای پیشرفت سریع‌تر در فرآیند بررسی کتاب، می‌توانید چند صفحه از متن کتاب را بارگذاری کنید.</small>
@@ -422,8 +424,8 @@
             
             if (file) {
                 const fileSize = (file.size / (1024 * 1024)).toFixed(2);
-                if (fileSize > 10) {
-                    fileInfo.innerHTML = '<span style="color: red;">حجم فایل نباید بیشتر از 10 مگابایت باشد</span>';
+                if (fileSize > 20) {
+                    fileInfo.innerHTML = '<span style="color: red;">حجم فایل نباید بیشتر از 20 مگابایت باشد</span>';
                     this.value = '';
                 } else {
                     fileInfo.innerHTML = `فایل انتخاب شده: ${file.name} (${fileSize} MB)`;
@@ -433,10 +435,8 @@
             }
         });
 
-        // مدیریت فرم با Formspree
-        document.getElementById('submissionForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
+        // مدیریت فرم
+        document.getElementById('submissionForm').addEventListener('submit', function(e) {
             const submitBtn = document.getElementById('submitBtn');
             const successMessage = document.getElementById('successMessage');
             const requiredFields = this.querySelectorAll('[required]');
@@ -453,43 +453,12 @@
             });
             
             if (!valid) {
+                e.preventDefault();
                 alert('لطفاً بخش‌های ستاره‌دار را پر کنید.');
-                return;
-            }
-
-            // نمایش وضعیت ارسال
-            const originalText = submitBtn.innerHTML;
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = 'در حال ارسال...';
-
-            try {
-                const formData = new FormData(this);
-                
-                const response = await fetch(this.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-
-                if (response.ok) {
-                    // نمایش پیام موفقیت
-                    successMessage.style.display = 'block';
-                    successMessage.scrollIntoView({ behavior: 'smooth' });
-                    
-                    // ریست کردن فرم
-                    this.reset();
-                    document.getElementById('fileInfo').innerHTML = '';
-                } else {
-                    alert('خطا در ارسال فرم. لطفاً دوباره تلاش کنید.');
-                }
-            } catch (error) {
-                alert('خطا در ارسال فرم. لطفاً دوباره تلاش کنید.');
-            } finally {
-                // بازگرداندن دکمه به حالت اول
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalText;
+            } else {
+                // نمایش پیام موفقیت
+                successMessage.style.display = 'block';
+                successMessage.scrollIntoView({ behavior: 'smooth' });
             }
         });
     </script>
