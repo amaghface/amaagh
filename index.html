@@ -336,177 +336,53 @@
 <section id="form" class="form-section">
     <div class="form-container">
         <h2 class="section-title text-center">فرم درخواست بررسی اثر</h2>
-        <p class="text-center mb-4">از طریق این فرم اطلاعات درخواستی را ثبت کنید تا در اولین فرصت با شما تماس برقرار کنیم. پاسخ درخواست شما در کم‌تر از یک هفته از راه رایانامه برای شما فرستاده خواهد شد.</p>
+        <p class="text-center mb-4">از طریق این فرم اطلاعات درخواستی را ثبت کنید تا در اولین فرصت با شما تماس برقرار کنیم.</p>
         
-        <div class="success-message" id="successMessage" style="display: none; background: #d4edda; color: #155724; padding: 15px; border-radius: 5px; margin-bottom: 20px; border: 1px solid #c3e6cb;">
-            درخواست شما با موفقیت ارسال شد. پاسخ در کم‌تر از یک هفته از راه رایانامه برای شما فرستاده خواهد شد.
-        </div>
-
-        <div class="error-message" id="errorMessage" style="display: none; background: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; margin-bottom: 20px; border: 1px solid #f5c6cb;">
-            خطا در ارسال فرم. لطفاً دوباره تلاش کنید.
-        </div>
-        
-        <form id="submissionForm">
+        <form action="https://formsubmit.co/amagh.pub@gmail.com" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="_subject" value="درخواست جدید بررسی اثر - نشر اعماق">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            
             <div class="form-row">
                 <div class="form-group">
                     <label class="form-label required">نام و نام خانوادگی</label>
-                    <input type="text" class="form-control" name="name" required>
+                    <input type="text" class="form-control" name="نام و نام خانوادگی" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label required">نام کتاب</label>
-                    <input type="text" class="form-control" name="book" required>
+                    <input type="text" class="form-control" name="نام کتاب" required>
                 </div>
             </div>
             
             <div class="form-group">
                 <label class="form-label required">موضوع کتاب</label>
-                <input type="text" class="form-control" name="subject" required>
+                    <input type="text" class="form-control" name="موضوع کتاب" required>
             </div>
             
             <div class="form-group">
                 <label class="form-label">توضیح کوتاه درمورد اثر</label>
-                <textarea class="form-control" name="description" rows="3"></textarea>
+                <textarea class="form-control" name="توضیحات کتاب" rows="3"></textarea>
             </div>
             
             <div class="form-row">
                 <div class="form-group">
-                    <label class="form-label">شماره تماس واتساپی <span class="form-note">(برای جلسه آنلاین)</span></label>
-                    <input type="tel" class="form-control" name="phone">
+                    <label class="form-label">شماره تماس</label>
+                    <input type="tel" class="form-control" name="شماره تماس">
                 </div>
                 <div class="form-group">
-                    <label class="form-label required">ایمیل <span class="form-note">(برای برگزاری جلسه آنلاین در Google Meet)</span></label>
-                    <input type="email" class="form-control" name="email" required>
+                    <label class="form-label required">ایمیل</label>
+                    <input type="email" class="form-control" name="ایمیل" required>
                 </div>
             </div>
             
             <div class="form-group">
-                <label class="form-label">بارگذاری فایل <span class="form-note">(حداکثر 20 مگابایت - قالب‌های PDF, Word)</span></label>
-                <input type="file" class="form-control" name="attachment" accept=".pdf,.doc,.docx" id="fileInput">
-                <div class="file-info" id="fileInfo"></div>
-                
-                <small class="text-muted form-note">درصورت تمایل برای پیشرفت سریع‌تر در فرآیند بررسی کتاب، می‌توانید چند صفحه از متن کتاب را بارگذاری کنید.</small>
+                <label class="form-label">بارگذاری فایل</label>
+                <input type="file" class="form-control" name="فایل پیوستی" accept=".pdf,.doc,.docx">
             </div>
             
-            <div class="form-note">
-                <p class="text-muted">و یا می‌توانید بخشی از اثر خود را همراه با مشخصات درخواستی در فرم، از طریق ایمیل زیر جهت بررسی برای ما ارسال کنید.
-amagh.pub@gmail.com</p>
-            </div>
-            
-            <button type="submit" class="btn btn-primary btn-lg w-100" id="submitBtn">
-                <span id="btnText">ارسال درخواست</span>
-                <div id="btnLoading" style="display: none;">
-                    در حال ارسال...
-                </div>
-            </button>
+            <button type="submit" class="btn btn-primary btn-lg w-100">ارسال درخواست</button>
         </form>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const submissionForm = document.getElementById('submissionForm');
-            const successMessage = document.getElementById('successMessage');
-            const errorMessage = document.getElementById('errorMessage');
-            const submitBtn = document.getElementById('submitBtn');
-            const btnText = document.getElementById('btnText');
-            const btnLoading = document.getElementById('btnLoading');
-            const fileInput = document.getElementById('fileInput');
-            const fileInfo = document.getElementById('fileInfo');
-
-            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxkEAt3ouhWPJxRbm9sjbSmDr0S5yGPeh776JS7Avp34oPLWQ6XMahpgVwCb4xFIn66OQ/exec';
-
-            // مدیریت فایل
-            if (fileInput) {
-                fileInput.addEventListener('change', function(e) {
-                    const file = e.target.files[0];
-                    if (file) {
-                        const fileSize = (file.size / (1024 * 1024)).toFixed(2);
-                        if (fileSize > 20) {
-                            fileInfo.innerHTML = '<span style="color: red;">حجم فایل نباید بیشتر از 20 مگابایت باشد</span>';
-                            this.value = '';
-                        } else {
-                            fileInfo.innerHTML = `فایل انتخاب شده: ${file.name} (${fileSize} MB)`;
-                        }
-                    } else {
-                        fileInfo.innerHTML = '';
-                    }
-                });
-            }
-
-            // مدیریت فرم
-            if (submissionForm) {
-                submissionForm.addEventListener('submit', async function(e) {
-                    e.preventDefault();
-                    
-                    successMessage.style.display = 'none';
-                    errorMessage.style.display = 'none';
-                    
-                    const requiredFields = this.querySelectorAll('[required]');
-                    let valid = true;
-                    
-                    requiredFields.forEach(field => {
-                        if (!field.value.trim()) {
-                            valid = false;
-                            field.style.borderColor = 'red';
-                        } else {
-                            field.style.borderColor = '';
-                        }
-                    });
-                    
-                    if (!valid) {
-                        alert('لطفاً فیلدهای اجباری را پر کنید.');
-                        return;
-                    }
-                    
-                    btnText.style.display = 'none';
-                    btnLoading.style.display = 'block';
-                    submitBtn.disabled = true;
-                    
-                    try {
-                        const formData = new FormData(this);
-                        const data = {
-                            name: formData.get('name'),
-                            book: formData.get('book'),
-                            subject: formData.get('subject'),
-                            description: formData.get('description'),
-                            phone: formData.get('phone'),
-                            email: formData.get('email')
-                        };
-
-                        const response = await fetch(GOOGLE_SCRIPT_URL, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(data)
-                        });
-                        
-                        const result = await response.json();
-                        
-                        if (result.success) {
-                            successMessage.style.display = 'block';
-                            submissionForm.reset();
-                            fileInfo.innerHTML = '';
-                            window.scrollTo({ top: 0, behavior: 'smooth' });
-                            
-                            setTimeout(() => {
-                                successMessage.style.display = 'none';
-                            }, 5000);
-                        } else {
-                            throw new Error(result.error || 'خطا در سرور');
-                        }
-                        
-                    } catch (error) {
-                        console.error('Error:', error);
-                        errorMessage.style.display = 'block';
-                    } finally {
-                        btnText.style.display = 'block';
-                        btnLoading.style.display = 'none';
-                        submitBtn.disabled = false;
-                    }
-                });
-            }
-        });
-    </script>
 </section>
 
 
