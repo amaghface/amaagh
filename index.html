@@ -337,47 +337,62 @@
 <section id="form" class="form-section">
     <div class="form-container">
         <h2 class="section-title text-center">فرم درخواست بررسی اثر</h2>
-        <p class="text-center mb-4">از طریق این فرم اطلاعات درخواستی را ثبت کنید تا در اولین فرصت با شما تماس برقرار کنیم.</p>
+        <p class="text-center mb-4">از طریق این فرم اطلاعات درخواستی را ثبت کنید تا در اولین فرصت با شما تماس برقرار کنیم. پاسخ درخواست شما در کم‌تر از یک هفته از راه رایانامه برای شما فرستاده خواهد شد.</p>
         
+        <!-- پیام موفقیت -->
         <div class="success-message" id="successMessage" style="display: none; background: #d4edda; color: #155724; padding: 15px; border-radius: 5px; margin-bottom: 20px; border: 1px solid #c3e6cb;">
-            درخواست شما با موفقیت ارسال شد. به زودی با شما تماس خواهیم گرفت.
+            درخواست شما با موفقیت ارسال شد. پاسخ در کم‌تر از یک هفته از راه رایانامه برای شما فرستاده خواهد شد.
         </div>
 
+        <!-- پیام خطا -->
         <div class="error-message" id="errorMessage" style="display: none; background: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; margin-bottom: 20px; border: 1px solid #f5c6cb;">
             خطا در ارسال فرم. لطفاً دوباره تلاش کنید.
         </div>
-
+        
         <form id="submissionForm">
             <div class="form-row">
                 <div class="form-group">
                     <label class="form-label required">نام و نام خانوادگی</label>
-                    <input type="text" class="form-control" name="name" required>
+                    <input type="text" class="form-control" name="نام و نام خانوادگی" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label required">نام کتاب</label>
-                    <input type="text" class="form-control" name="book" required>
+                    <input type="text" class="form-control" name="نام کتاب" required>
                 </div>
             </div>
             
             <div class="form-group">
                 <label class="form-label required">موضوع کتاب</label>
-                <input type="text" class="form-control" name="subject" required>
+                <input type="text" class="form-control" name="موضوع کتاب" required>
             </div>
             
             <div class="form-group">
                 <label class="form-label">توضیح کوتاه درمورد اثر</label>
-                <textarea class="form-control" name="description" rows="3"></textarea>
+                <textarea class="form-control" name="توضیحات کتاب" rows="3"></textarea>
             </div>
             
             <div class="form-row">
                 <div class="form-group">
-                    <label class="form-label">شماره تماس واتساپی</label>
-                    <input type="tel" class="form-control" name="phone">
+                    <label class="form-label">شماره تماس واتساپی <span class="form-note">(برای جلسه آنلاین)</span></label>
+                    <input type="tel" class="form-control" name="شماره تماس">
                 </div>
                 <div class="form-group">
-                    <label class="form-label required">ایمیل</label>
-                    <input type="email" class="form-control" name="email" required>
+                    <label class="form-label required">ایمیل <span class="form-note">(برای برگزاری جلسه آنلاین در Google Meet)</span></label>
+                    <input type="email" class="form-control" name="ایمیل" required>
                 </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">بارگذاری فایل <span class="form-note">(حداکثر 20 مگابایت - قالب‌های PDF, Word)</span></label>
+                <input type="file" class="form-control" name="فایل پیوستی" accept=".pdf,.doc,.docx" id="fileInput">
+                <div class="file-info" id="fileInfo"></div>
+                
+                <small class="text-muted form-note">درصورت تمایل برای پیشرفت سریع‌تر در فرآیند بررسی کتاب، می‌توانید چند صفحه از متن کتاب را بارگذاری کنید.</small>
+            </div>
+            
+            <div class="form-note">
+                <p class="text-muted">و یا می‌توانید بخشی از اثر خود را همراه با مشخصات درخواستی در فرم، از طریق ایمیل زیر جهت بررسی برای ما ارسال کنید.
+amagh.pub@gmail.com</p>
             </div>
             
             <button type="submit" class="btn btn-primary btn-lg w-100" id="submitBtn">
@@ -397,10 +412,32 @@
             const submitBtn = document.getElementById('submitBtn');
             const btnText = document.getElementById('btnText');
             const btnLoading = document.getElementById('btnLoading');
+            const fileInput = document.getElementById('fileInput');
+            const fileInfo = document.getElementById('fileInfo');
 
-            // 🔗 URL اسکریپت گوگل - همینی که داری
+            // URL اسکریپت گوگل
             const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxkEAt3ouhWPJxRbm9sjbSmDr0S5yGPeh776JS7Avp34oPLWQ6XMahpgVwCb4xFIn66OQ/exec';
 
+            // مدیریت نمایش اطلاعات فایل
+            if (fileInput) {
+                fileInput.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    
+                    if (file) {
+                        const fileSize = (file.size / (1024 * 1024)).toFixed(2);
+                        if (fileSize > 20) {
+                            fileInfo.innerHTML = '<span style="color: red;">حجم فایل نباید بیشتر از 20 مگابایت باشد</span>';
+                            this.value = '';
+                        } else {
+                            fileInfo.innerHTML = `فایل انتخاب شده: ${file.name} (${fileSize} MB)`;
+                        }
+                    } else {
+                        fileInfo.innerHTML = '';
+                    }
+                });
+            }
+
+            // مدیریت ارسال فرم
             if (submissionForm) {
                 submissionForm.addEventListener('submit', async function(e) {
                     e.preventDefault();
@@ -433,9 +470,18 @@
                     submitBtn.disabled = true;
                     
                     try {
+                        // آماده کردن داده‌ها برای اسکریپت گوگل
                         const formData = new FormData(this);
-                        const data = Object.fromEntries(formData);
-                        
+                        const data = {
+                            name: formData.get('نام و نام خانوادگی'),
+                            book: formData.get('نام کتاب'),
+                            subject: formData.get('موضوع کتاب'),
+                            description: formData.get('توضیحات کتاب'),
+                            phone: formData.get('شماره تماس'),
+                            email: formData.get('ایمیل')
+                        };
+
+                        // ارسال به اسکریپت گوگل
                         const response = await fetch(GOOGLE_SCRIPT_URL, {
                             method: 'POST',
                             headers: {
@@ -447,8 +493,10 @@
                         const result = await response.json();
                         
                         if (result.success) {
+                            // نمایش پیام موفقیت
                             successMessage.style.display = 'block';
                             submissionForm.reset();
+                            fileInfo.innerHTML = '';
                             window.scrollTo({ top: 0, behavior: 'smooth' });
                             
                             // پنهان کردن پیام موفقیت بعد از 5 ثانیه
@@ -463,6 +511,7 @@
                         console.error('Error:', error);
                         errorMessage.style.display = 'block';
                     } finally {
+                        // مخفی کردن لودینگ
                         btnText.style.display = 'block';
                         btnLoading.style.display = 'none';
                         submitBtn.disabled = false;
