@@ -343,11 +343,9 @@
             درخواست شما با موفقیت ارسال شد. پاسخ در کم‌تر از یک هفته از راه رایانامه برای شما فرستاده خواهد شد.
         </div>
         
-        <form action="https://formsubmit.co/amagh.pub@gmail.com" method="POST" enctype="multipart/form-data" id="submissionForm">
+        <form action="https://submit-form.com/amagh.pub@gmail.com" method="POST" enctype="multipart/form-data" id="submissionForm">
             <input type="hidden" name="_subject" value="درخواست جدید بررسی اثر - نشر اعماق">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_next" value="https://amaagh.ir/#form">
+            <input type="hidden" name="_redirect" value="https://amaagh.ir/#form">
             
             <div class="form-row">
                 <div class="form-group">
@@ -417,7 +415,7 @@ amagh.pub@gmail.com</p>
             }
         });
 
-        // نمایش پیام موفقیت اگر از FormSubmit برگشتیم
+        // نمایش پیام موفقیت اگر از Formspark برگشتیم
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('success') === 'true') {
