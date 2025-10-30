@@ -336,12 +336,18 @@
 <section id="form" class="form-section">
     <div class="form-container">
         <h2 class="section-title text-center">فرم درخواست بررسی اثر</h2>
-        <p class="text-center mb-4">از طریق این فرم اطلاعات درخواستی را ثبت کنید تا در اولین فرصت با شما تماس برقرار کنیم.</p>
+        <p class="text-center mb-4">از طریق این فرم اطلاعات درخواستی را ثبت کنید تا در اولین فرصت با شما تماس برقرار کنیم. پاسخ درخواست شما در کم‌تر از یک هفته از راه رایانامه برای شما فرستاده خواهد شد.</p>
         
-        <form action="https://formsubmit.co/amagh.pub@gmail.com" method="POST" enctype="multipart/form-data">
+        <!-- پیام موفقیت -->
+        <div class="success-message" id="successMessage" style="display: none; background: #d4edda; color: #155724; padding: 15px; border-radius: 5px; margin-bottom: 20px; border: 1px solid #c3e6cb;">
+            درخواست شما با موفقیت ارسال شد. پاسخ در کم‌تر از یک هفته از راه رایانامه برای شما فرستاده خواهد شد.
+        </div>
+        
+        <form action="https://formsubmit.co/amagh.pub@gmail.com" method="POST" enctype="multipart/form-data" id="submissionForm">
             <input type="hidden" name="_subject" value="درخواست جدید بررسی اثر - نشر اعماق">
             <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_next" value="https://amaagh.ir/#form">
             
             <div class="form-row">
                 <div class="form-group">
@@ -356,7 +362,7 @@
             
             <div class="form-group">
                 <label class="form-label required">موضوع کتاب</label>
-                    <input type="text" class="form-control" name="موضوع کتاب" required>
+                <input type="text" class="form-control" name="موضوع کتاب" required>
             </div>
             
             <div class="form-group">
@@ -366,23 +372,67 @@
             
             <div class="form-row">
                 <div class="form-group">
-                    <label class="form-label">شماره تماس</label>
+                    <label class="form-label">شماره تماس واتساپی <span class="form-note">(برای جلسه آنلاین)</span></label>
                     <input type="tel" class="form-control" name="شماره تماس">
                 </div>
                 <div class="form-group">
-                    <label class="form-label required">ایمیل</label>
+                    <label class="form-label required">ایمیل <span class="form-note">(برای برگزاری جلسه آنلاین در Google Meet)</span></label>
                     <input type="email" class="form-control" name="ایمیل" required>
                 </div>
             </div>
             
             <div class="form-group">
-                <label class="form-label">بارگذاری فایل</label>
-                <input type="file" class="form-control" name="فایل پیوستی" accept=".pdf,.doc,.docx">
+                <label class="form-label">بارگذاری فایل <span class="form-note">(حداکثر 20 مگابایت - قالب‌های PDF, Word)</span></label>
+                <input type="file" class="form-control" name="فایل پیوستی" accept=".pdf,.doc,.docx" id="fileInput">
+                <div class="file-info" id="fileInfo"></div>
+                
+                <small class="text-muted form-note">درصورت تمایل برای پیشرفت سریع‌تر در فرآیند بررسی کتاب، می‌توانید چند صفحه از متن کتاب را بارگذاری کنید.</small>
             </div>
             
-            <button type="submit" class="btn btn-primary btn-lg w-100">ارسال درخواست</button>
+            <div class="form-note">
+                <p class="text-muted">و یا می‌توانید بخشی از اثر خود را همراه با مشخصات درخواستی در فرم، از طریق ایمیل زیر جهت بررسی برای ما ارسال کنید.
+amagh.pub@gmail.com</p>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-lg w-100" id="submitBtn">ارسال درخواست</button>
         </form>
     </div>
+
+    <script>
+        // مدیریت نمایش اطلاعات فایل
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const fileInfo = document.getElementById('fileInfo');
+            const file = e.target.files[0];
+            
+            if (file) {
+                const fileSize = (file.size / (1024 * 1024)).toFixed(2);
+                if (fileSize > 20) {
+                    fileInfo.innerHTML = '<span style="color: red;">حجم فایل نباید بیشتر از 20 مگابایت باشد</span>';
+                    this.value = '';
+                } else {
+                    fileInfo.innerHTML = `فایل انتخاب شده: ${file.name} (${fileSize} MB)`;
+                }
+            } else {
+                fileInfo.innerHTML = '';
+            }
+        });
+
+        // نمایش پیام موفقیت اگر از FormSubmit برگشتیم
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('success') === 'true') {
+                document.getElementById('successMessage').style.display = 'block';
+                window.location.hash = '#form';
+            }
+        });
+
+        // مدیریت ارسال فرم
+        document.getElementById('submissionForm').addEventListener('submit', function() {
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'در حال ارسال...';
+        });
+    </script>
 </section>
 
 
