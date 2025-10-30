@@ -334,13 +334,17 @@
     <section class="hero-banner" style="background-image: url('banner2.jpg')"></section>
     
 
-    <section id="form" class="form-section">
+<section id="form" class="form-section">
     <div class="form-container">
         <h2 class="section-title text-center">فرم درخواست بررسی اثر</h2>
         <p class="text-center mb-4">از طریق این فرم اطلاعات درخواستی را ثبت کنید تا در اولین فرصت با شما تماس برقرار کنیم.</p>
         
         <div class="success-message" id="successMessage" style="display: none; background: #d4edda; color: #155724; padding: 15px; border-radius: 5px; margin-bottom: 20px; border: 1px solid #c3e6cb;">
-            درخواست شما با موفقیت ارسال شد.
+            درخواست شما با موفقیت ارسال شد. به زودی با شما تماس خواهیم گرفت.
+        </div>
+
+        <div class="error-message" id="errorMessage" style="display: none; background: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; margin-bottom: 20px; border: 1px solid #f5c6cb;">
+            خطا در ارسال فرم. لطفاً دوباره تلاش کنید.
         </div>
 
         <form id="submissionForm">
@@ -367,7 +371,7 @@
             
             <div class="form-row">
                 <div class="form-group">
-                    <label class="form-label">شماره تماس</label>
+                    <label class="form-label">شماره تماس واتساپی</label>
                     <input type="tel" class="form-control" name="phone">
                 </div>
                 <div class="form-group">
@@ -389,20 +393,26 @@
         document.addEventListener('DOMContentLoaded', function() {
             const submissionForm = document.getElementById('submissionForm');
             const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
             const submitBtn = document.getElementById('submitBtn');
             const btnText = document.getElementById('btnText');
             const btnLoading = document.getElementById('btnLoading');
 
-            // URL اسکریپت گوگل - این رو بعد از ساخت اسکریپت جایگزین کن
-            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+            // 🔗 URL اسکریپت گوگل - همینی که داری
+            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxkEAt3ouhWPJxRbm9sjbSmDr0S5yGPeh776JS7Avp34oPLWQ6XMahpgVwCb4xFIn66OQ/exec';
 
             if (submissionForm) {
                 submissionForm.addEventListener('submit', async function(e) {
                     e.preventDefault();
                     
+                    // پنهان کردن پیغام‌های قبلی
+                    successMessage.style.display = 'none';
+                    errorMessage.style.display = 'none';
+                    
                     const requiredFields = this.querySelectorAll('[required]');
                     let valid = true;
                     
+                    // بررسی فیلدهای اجباری
                     requiredFields.forEach(field => {
                         if (!field.value.trim()) {
                             valid = false;
@@ -434,20 +444,24 @@
                             body: JSON.stringify(data)
                         });
                         
-                        if (response.ok) {
+                        const result = await response.json();
+                        
+                        if (result.success) {
                             successMessage.style.display = 'block';
                             submissionForm.reset();
                             window.scrollTo({ top: 0, behavior: 'smooth' });
                             
+                            // پنهان کردن پیام موفقیت بعد از 5 ثانیه
                             setTimeout(() => {
                                 successMessage.style.display = 'none';
                             }, 5000);
                         } else {
-                            throw new Error('خطا در ارسال');
+                            throw new Error(result.error || 'خطا در سرور');
                         }
                         
                     } catch (error) {
-                        alert('خطا در ارسال فرم. لطفاً دوباره تلاش کنید.');
+                        console.error('Error:', error);
+                        errorMessage.style.display = 'block';
                     } finally {
                         btnText.style.display = 'block';
                         btnLoading.style.display = 'none';
