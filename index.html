@@ -402,14 +402,6 @@
 </section>
 
 <script>
-  // نمایش پیام موفقیت اگر URL شامل #success باشد
-  document.addEventListener('DOMContentLoaded', function () {
-    if (window.location.hash === '#success') {
-      const successMessage = document.getElementById('successMessage');
-      successMessage.style.display = 'block';
-      successMessage.scrollIntoView({ behavior: 'smooth' });
-    }
-  });
 
   // نمایش اطلاعات فایل انتخاب‌شده
   document.querySelector('input[type="file"]').addEventListener('change', function (e) {
