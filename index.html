@@ -341,14 +341,13 @@
         
         <!-- پیام موفقیت -->
         <div class="success-message" id="successMessage" style="display: none; background: #d4edda; color: #155724; padding: 15px; border-radius: 5px; margin-bottom: 20px; border: 1px solid #c3e6cb;">
-             درخواست شما با موفقیت ارسال شد. پاسخ در کم‌تر از یک هفته از راه رایانامه برای شما فرستاده خواهد شد.
+            درخواست شما با موفقیت ارسال شد. پاسخ در کم‌تر از یک هفته از راه رایانامه برای شما فرستاده خواهد شد.
         </div>
         
         <form action="https://formsubmit.co/amagh.pub@gmail.com" method="POST" enctype="multipart/form-data" id="submissionForm">
             <input type="hidden" name="_subject" value="درخواست جدید بررسی اثر - نشر اعماق">
             <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_next" value="https://amaagh.ir/#form?success=true">
             
             <div class="form-row">
                 <div class="form-group">
@@ -400,21 +399,16 @@ amagh.pub@gmail.com</p>
     </div>
 
     <script>
-        // وقتی صفحه لود شد
         document.addEventListener('DOMContentLoaded', function() {
-            // نمایش پیام موفقیت اگر از FormSubmit برگشتیم
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('success') === 'true') {
-                const successMessage = document.getElementById('successMessage');
-                successMessage.style.display = 'block';
-                window.location.hash = '#form';
-            }
+            const submissionForm = document.getElementById('submissionForm');
+            const successMessage = document.getElementById('successMessage');
+            const submitBtn = document.getElementById('submitBtn');
+            const fileInput = document.getElementById('fileInput');
+            const fileInfo = document.getElementById('fileInfo');
 
             // مدیریت نمایش اطلاعات فایل
-            const fileInput = document.getElementById('fileInput');
             if (fileInput) {
                 fileInput.addEventListener('change', function(e) {
-                    const fileInfo = document.getElementById('fileInfo');
                     const file = e.target.files[0];
                     
                     if (file) {
@@ -432,10 +426,10 @@ amagh.pub@gmail.com</p>
             }
 
             // مدیریت ارسال فرم
-            const submissionForm = document.getElementById('submissionForm');
             if (submissionForm) {
                 submissionForm.addEventListener('submit', function(e) {
-                    const submitBtn = document.getElementById('submitBtn');
+                    e.preventDefault();
+                    
                     const requiredFields = this.querySelectorAll('[required]');
                     let valid = true;
                     
@@ -450,41 +444,50 @@ amagh.pub@gmail.com</p>
                     });
                     
                     if (!valid) {
-                        e.preventDefault();
-                        alert('لطفاً فیلدهای اجباری (ستاره‌دار) را پر کنید.');
+                        alert('لطفاً فیلدهای اجباری را پر کنید.');
                         return;
                     }
                     
-                    // اگر همه چیز اوکی بود
+                    // غیرفعال کردن دکمه
                     submitBtn.disabled = true;
                     submitBtn.innerHTML = 'در حال ارسال...';
                     
-                    // اجازه می‌دهیم فرم ارسال شود
+                    // ارسال فرم به صورت دستی
+                    const formData = new FormData(this);
+                    
+                    fetch(this.action, {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            // نمایش پیام موفقیت
+                            successMessage.style.display = 'block';
+                            submissionForm.reset();
+                            fileInfo.innerHTML = '';
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                            
+                            // ریست کردن فرم بعد از 5 ثانیه
+                            setTimeout(() => {
+                                successMessage.style.display = 'none';
+                            }, 5000);
+                        } else {
+                            alert('خطا در ارسال فرم. لطفاً دوباره تلاش کنید.');
+                        }
+                    })
+                    .catch(error => {
+                        alert('خطا در ارسال فرم. لطفاً دوباره تلاش کنید.');
+                    })
+                    .finally(() => {
+                        // فعال کردن دکمه
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = 'ارسال درخواست';
+                    });
                 });
             }
         });
     </script>
 </section>
-    
-
-<script>
-// نمایش پیام موفقیت اگر پارامتر success در URL وجود دارد
-document.addEventListener('DOMContentLoaded', function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('success') === 'true') {
-        document.getElementById('successMessage').style.display = 'block';
-        // اسکرول به فرم
-        document.getElementById('form').scrollIntoView({ behavior: 'smooth' });
-    }
-});
-
-// مدیریت ارسال فرم
-document.getElementById('submissionForm').addEventListener('submit', function(e) {
-    const submitBtn = document.getElementById('submitBtn');
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = 'در حال ارسال...';
-});
-</script>
 
     <footer class="footer">
         <div class="container">
