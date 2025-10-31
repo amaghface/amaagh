@@ -120,9 +120,10 @@ small, .caption {
     "wght" var(--kahroba-wght),
     "wdth" var(--kahroba-wdth),
     "CNTR" var(--kahroba-cntr);
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 12px;
+  padding-bottom: 12px;
   line-height: 1.6;
+  display: inline-block;
 }
 
 /* پشتیبانی از مرورگرهای قدیمی */
@@ -142,8 +143,9 @@ small, .caption {
 
   .nav-link {
     font-weight: 400;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    display: inline-block;
   }
 
   .section-title {
