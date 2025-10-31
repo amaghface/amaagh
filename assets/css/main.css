@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'Kahroba';
+  src: url('../fonts/Kahroba-VF-FD.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-stretch: 87.5% 125%;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  font-family: 'Kahroba', sans-serif;
+  font-optical-sizing: auto;
+  font-variation-settings: 'wght' 400, 'CNTR' 50, 'wdth' 100;
+}
