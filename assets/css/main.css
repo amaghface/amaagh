@@ -9,7 +9,7 @@
 
 /* متغیرهای پایه */
 :root {
-  --kahroba-wght: 300;
+  --kahroba-wght: 400;
   --kahroba-wdth: 95;
   --kahroba-cntr: 45;
 }
@@ -17,21 +17,21 @@
 /* تطبیق با تنظیمات کاربر */
 @media (prefers-contrast: more) {
   :root {
-    --kahroba-wght: 450;
+    --kahroba-wght: 550;
     --kahroba-cntr: 75;
   }
 }
 
 @media (prefers-contrast: less) {
   :root {
-    --kahroba-wght: 250;
+    --kahroba-wght: 350;
     --kahroba-cntr: 30;
   }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --kahroba-wght: 350;
+    --kahroba-wght: 480;
   }
 }
 
@@ -50,18 +50,18 @@ body {
   background-color: #ffffff;
 }
 
-/* تیترها – سبک‌تر ولی متمایز */
+/* تیترها – سنگین‌تر و متمایز */
 h1, h2, h3 {
-  font-weight: calc(var(--kahroba-wght) + 150);
+  font-weight: calc(var(--kahroba-wght) + 200);
   font-variation-settings:
-    "wght" calc(var(--kahroba-wght) + 150),
+    "wght" calc(var(--kahroba-wght) + 200),
     "wdth" 105,
     "CNTR" 65;
   line-height: 1.3;
   margin-bottom: 0.8em;
 }
 
-/* متن‌ها – سبک و خوانا */
+/* متن‌ها – خوانا و متعادل */
 p, li, span {
   font-weight: var(--kahroba-wght);
   font-variation-settings:
@@ -73,9 +73,9 @@ p, li, span {
 
 /* متن‌های ریزتر */
 small, .caption {
-  font-weight: calc(var(--kahroba-wght) - 75);
+  font-weight: calc(var(--kahroba-wght) - 50);
   font-variation-settings:
-    "wght" calc(var(--kahroba-wght) - 75),
+    "wght" calc(var(--kahroba-wght) - 50),
     "wdth" 90,
     "CNTR" 35;
   font-size: 0.875rem;
@@ -87,7 +87,7 @@ small, .caption {
   h1, h2 {
     font-size: 2.2em;
     font-variation-settings:
-      "wght" calc(var(--kahroba-wght) + 200),
+      "wght" calc(var(--kahroba-wght) + 250),
       "wdth" 115,
       "CNTR" 75;
   }
@@ -98,7 +98,7 @@ small, .caption {
   h1, h2 {
     font-size: 1.8em;
     font-variation-settings:
-      "wght" calc(var(--kahroba-wght) + 100),
+      "wght" calc(var(--kahroba-wght) + 150),
       "wdth" 90,
       "CNTR" 55;
   }
@@ -106,9 +106,9 @@ small, .caption {
 
 /* تیترهای سفارشی */
 .section-title {
-  font-weight: calc(var(--kahroba-wght) + 150);
+  font-weight: calc(var(--kahroba-wght) + 200);
   font-variation-settings:
-    "wght" calc(var(--kahroba-wght) + 150),
+    "wght" calc(var(--kahroba-wght) + 200),
     "wdth" 105,
     "CNTR" 65;
 }
@@ -120,8 +120,7 @@ small, .caption {
     "wght" var(--kahroba-wght),
     "wdth" var(--kahroba-wdth),
     "CNTR" var(--kahroba-cntr);
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding-block: 14px;
   line-height: 1.6;
   display: inline-block;
 }
@@ -130,25 +129,24 @@ small, .caption {
 @supports not (font-variation-settings: "wght" 400) {
   body {
     font-family: Vazir, Tahoma, sans-serif;
-    font-weight: 400;
+    font-weight: 500;
   }
 
   h1, h2, h3 {
-    font-weight: 700;
+    font-weight: 800;
   }
 
   small, .caption {
-    font-weight: 300;
+    font-weight: 350;
   }
 
   .nav-link {
-    font-weight: 400;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    font-weight: 500;
+    padding-block: 14px;
     display: inline-block;
   }
 
   .section-title {
-    font-weight: 600;
+    font-weight: 700;
   }
 }
