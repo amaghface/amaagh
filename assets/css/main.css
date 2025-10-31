@@ -9,5 +9,22 @@
 
 body {
   font-family: 'Kahroba', Vazir, Tahoma, sans-serif;
+  font-weight: 400;
   font-optical-sizing: auto;
+  font-variation-settings: "wght" 400, "wdth" 100;
+}
+
+h1 {
+  font-weight: 800;
+  font-variation-settings: "wght" 800;
+}
+
+h2 {
+  font-weight: 600;
+  font-variation-settings: "wght" 600;
+}
+
+p {
+  font-weight: 300;
+  font-variation-settings: "wght" 300;
 }
