@@ -101,3 +101,11 @@ small, .caption {
       "CNTR" 55;
   }
 }
+
+.section-title {
+  font-weight: calc(var(--kahroba-wght) + 150);
+  font-variation-settings:
+    "wght" calc(var(--kahroba-wght) + 150),
+    "wdth" 105,
+    "CNTR" 65;
+}
