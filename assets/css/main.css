@@ -109,3 +109,18 @@ small, .caption {
     "wdth" 105,
     "CNTR" 65;
 }
+
+@supports not (font-variation-settings: "wght" 400) {
+  body {
+    font-family: Vazir, Tahoma, sans-serif;
+    font-weight: 400;
+  }
+
+  h1, h2, h3 {
+    font-weight: 700;
+  }
+
+  small, .caption {
+    font-weight: 300;
+  }
+}
