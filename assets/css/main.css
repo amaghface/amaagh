@@ -7,12 +7,14 @@
   font-display: swap;
 }
 
+/* متغیرهای پایه برای تطبیق هوشمند */
 :root {
   --kahroba-wght: 400;
   --kahroba-wdth: 100;
   --kahroba-cntr: 50;
 }
 
+/* تطبیق با تنظیمات کاربر */
 @media (prefers-contrast: more) {
   :root {
     --kahroba-wght: 600;
@@ -33,6 +35,7 @@
   }
 }
 
+/* تنظیمات پایه برای بدنه */
 body {
   font-family: 'Kahroba', Vazir, Tahoma, sans-serif;
   font-optical-sizing: auto;
@@ -41,16 +44,50 @@ body {
     "wght" var(--kahroba-wght),
     "wdth" var(--kahroba-wdth),
     "CNTR" var(--kahroba-cntr);
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #182128;
+  background-color: #ffffff;
 }
 
+/* تیترها با تفاوت بصری واضح */
 h1, h2, h3 {
   font-weight: calc(var(--kahroba-wght) + 300);
+  font-variation-settings:
+    "wght" calc(var(--kahroba-wght) + 300),
+    "wdth" 112.5,
+    "CNTR" 80;
+  line-height: 1.3;
+  margin-bottom: 0.8em;
 }
 
+/* متن‌های معمولی */
 p, li, span {
   font-weight: var(--kahroba-wght);
+  font-variation-settings:
+    "wght" var(--kahroba-wght),
+    "wdth" var(--kahroba-wdth),
+    "CNTR" var(--kahroba-cntr);
+  margin-bottom: 1em;
 }
 
+/* متن‌های ریزتر */
 small, .caption {
   font-weight: calc(var(--kahroba-wght) - 100);
+  font-variation-settings:
+    "wght" calc(var(--kahroba-wght) - 100),
+    "wdth" 95,
+    "CNTR" 40;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+/* تطبیق در دسکتاپ برای تیترها */
+@media (min-width: 768px) {
+  h1, h2 {
+    font-variation-settings:
+      "wght" calc(var(--kahroba-wght) + 350),
+      "wdth" 120,
+      "CNTR" 90;
+  }
 }
