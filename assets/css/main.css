@@ -7,24 +7,50 @@
   font-display: swap;
 }
 
+:root {
+  --kahroba-wght: 400;
+  --kahroba-wdth: 100;
+  --kahroba-cntr: 50;
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --kahroba-wght: 600;
+    --kahroba-cntr: 80;
+  }
+}
+
+@media (prefers-contrast: less) {
+  :root {
+    --kahroba-wght: 300;
+    --kahroba-cntr: 30;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --kahroba-wght: 500;
+  }
+}
+
 body {
-  font-family: 'Kahroba', Vazir, Tahoma, sans-serif !important;
-  font-weight: 400 !important;
+  font-family: 'Kahroba', Vazir, Tahoma, sans-serif;
   font-optical-sizing: auto;
-  font-variation-settings: "wght" 400, "wdth" 100;
+  font-weight: var(--kahroba-wght);
+  font-variation-settings:
+    "wght" var(--kahroba-wght),
+    "wdth" var(--kahroba-wdth),
+    "CNTR" var(--kahroba-cntr);
 }
 
-h1, .h1 {
-  font-weight: 800 !important;
-  font-variation-settings: "wght" 800 !important;
+h1, h2, h3 {
+  font-weight: calc(var(--kahroba-wght) + 300);
 }
 
-h2, .h2 {
-  font-weight: 600 !important;
-  font-variation-settings: "wght" 600 !important;
+p, li, span {
+  font-weight: var(--kahroba-wght);
 }
 
-p {
-  font-weight: 300 !important;
-  font-variation-settings: "wght" 300 !important;
+small, .caption {
+  font-weight: calc(var(--kahroba-wght) - 100);
 }
