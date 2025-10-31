@@ -13,18 +13,48 @@ body {
   font-optical-sizing: auto;
   font-variation-settings: "wght" 400, "wdth" 100;
 }
+@font-face {
+  font-family: 'Kahroba';
+  src: url('../../fonts/Kahroba-VF-FD.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-stretch: 87.5% 125%;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  font-family: 'Kahroba', Vazir, Tahoma, sans-serif;
+  font-weight: 400;
+  font-optical-sizing: auto;
+  font-variation-settings: "wght" 400, "wdth" 100;
+}
 
 h1 {
   font-weight: 800;
-  font-variation-settings: "wght" 800;
+  font-variation-settings: "wght" 800, "wdth" 100;
 }
 
 h2 {
   font-weight: 600;
-  font-variation-settings: "wght" 600;
+  font-variation-settings: "wght" 600, "wdth" 100;
 }
 
 p {
   font-weight: 300;
-  font-variation-settings: "wght" 300;
+  font-variation-settings: "wght" 300, "wdth" 100;
+}
+
+h1 {
+  font-weight: 800;
+  font-variation-settings: "wght" 800, "wdth" 100;
+}
+
+h2 {
+  font-weight: 600;
+  font-variation-settings: "wght" 600, "wdth" 100;
+}
+
+p {
+  font-weight: 300;
+  font-variation-settings: "wght" 300, "wdth" 100;
 }
