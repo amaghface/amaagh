@@ -9,7 +9,7 @@
 
 /* متغیرهای پایه */
 :root {
-  --kahroba-wght: 350;
+  --kahroba-wght: 300;
   --kahroba-wdth: 95;
   --kahroba-cntr: 45;
 }
@@ -17,21 +17,21 @@
 /* تطبیق با تنظیمات کاربر */
 @media (prefers-contrast: more) {
   :root {
-    --kahroba-wght: 500;
+    --kahroba-wght: 450;
     --kahroba-cntr: 75;
   }
 }
 
 @media (prefers-contrast: less) {
   :root {
-    --kahroba-wght: 300;
+    --kahroba-wght: 250;
     --kahroba-cntr: 30;
   }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --kahroba-wght: 400;
+    --kahroba-wght: 350;
   }
 }
 
@@ -52,9 +52,9 @@ body {
 
 /* تیترها – سبک‌تر ولی متمایز */
 h1, h2, h3 {
-  font-weight: calc(var(--kahroba-wght) + 200);
+  font-weight: calc(var(--kahroba-wght) + 150);
   font-variation-settings:
-    "wght" calc(var(--kahroba-wght) + 200),
+    "wght" calc(var(--kahroba-wght) + 150),
     "wdth" 105,
     "CNTR" 65;
   line-height: 1.3;
@@ -73,9 +73,9 @@ p, li, span {
 
 /* متن‌های ریزتر */
 small, .caption {
-  font-weight: calc(var(--kahroba-wght) - 50);
+  font-weight: calc(var(--kahroba-wght) - 75);
   font-variation-settings:
-    "wght" calc(var(--kahroba-wght) - 50),
+    "wght" calc(var(--kahroba-wght) - 75),
     "wdth" 90,
     "CNTR" 35;
   font-size: 0.875rem;
@@ -85,8 +85,9 @@ small, .caption {
 /* تفاوت واقعی در دسکتاپ */
 @media (min-width: 768px) {
   h1, h2 {
+    font-size: 2.2em;
     font-variation-settings:
-      "wght" calc(var(--kahroba-wght) + 250),
+      "wght" calc(var(--kahroba-wght) + 200),
       "wdth" 115,
       "CNTR" 75;
   }
@@ -95,13 +96,15 @@ small, .caption {
 /* تفاوت واقعی در موبایل */
 @media (max-width: 767px) {
   h1, h2 {
+    font-size: 1.8em;
     font-variation-settings:
-      "wght" calc(var(--kahroba-wght) + 150),
-      "wdth" 95,
+      "wght" calc(var(--kahroba-wght) + 100),
+      "wdth" 90,
       "CNTR" 55;
   }
 }
 
+/* تیترهای سفارشی */
 .section-title {
   font-weight: calc(var(--kahroba-wght) + 150);
   font-variation-settings:
@@ -110,6 +113,19 @@ small, .caption {
     "CNTR" 65;
 }
 
+/* اصلاح فاصله منوی ناوبری */
+.nav-link {
+  font-weight: var(--kahroba-wght);
+  font-variation-settings:
+    "wght" var(--kahroba-wght),
+    "wdth" var(--kahroba-wdth),
+    "CNTR" var(--kahroba-cntr);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 1.6;
+}
+
+/* پشتیبانی از مرورگرهای قدیمی */
 @supports not (font-variation-settings: "wght" 400) {
   body {
     font-family: Vazir, Tahoma, sans-serif;
@@ -122,5 +138,15 @@ small, .caption {
 
   small, .caption {
     font-weight: 300;
+  }
+
+  .nav-link {
+    font-weight: 400;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .section-title {
+    font-weight: 600;
   }
 }
