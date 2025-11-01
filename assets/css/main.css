@@ -1,8 +1,17 @@
-/* تنظیمات فونت متغیر بدون تغییرات خطرناک */
+@font-face {
+  font-family: 'Kahroba';
+  src: url('../../fonts/Kahroba-VF-FD.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-stretch: 87.5% 125%;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* متغیرهای پایه */
 :root {
   --kahroba-wght: 400;
   --kahroba-wdth: 95;
-  --kahroba-cntr: 50;
+  --kahroba-cntr: 50; /* اصلاح‌شده برای تعادل بصری */
 }
 
 @media (prefers-contrast: more) {
@@ -25,7 +34,6 @@
   }
 }
 
-/* تنظیمات پایه فونت */
 body {
   font-family: 'Kahroba', Vazir, Tahoma, sans-serif;
   font-optical-sizing: auto;
@@ -40,34 +48,6 @@ body {
   background-color: #ffffff;
 }
 
-/* اصلاح ساختار منوی ناوبری برای تراز وسط */
-.navbar-nav {
-  display: flex;
-  align-items: center;
-  height: 100%;
-}
-
-.nav-item {
-  height: 48px;
-  display: flex;
-  align-items: center;
-}
-
-.nav-link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  padding-block: 0;
-  line-height: 1.6;
-  font-weight: var(--kahroba-wght);
-  font-variation-settings:
-    "wght" var(--kahroba-wght),
-    "wdth" var(--kahroba-wdth),
-    "CNTR" var(--kahroba-cntr);
-}
-
-/* تیترها */
 h1, h2, h3 {
   font-weight: calc(var(--kahroba-wght) + 250);
   font-variation-settings:
@@ -78,29 +58,6 @@ h1, h2, h3 {
   margin-bottom: 0.8em;
 }
 
-/* حالت دسکتاپ */
-@media (min-width: 768px) {
-  h1, h2 {
-    font-size: 2.2em;
-    font-variation-settings:
-      "wght" calc(var(--kahroba-wght) + 250),
-      "wdth" 115,
-      "CNTR" 65;
-  }
-}
-
-/* حالت موبایل */
-@media (max-width: 767px) {
-  h1, h2 {
-    font-size: 1.8em;
-    font-variation-settings:
-      "wght" calc(var(--kahroba-wght) + 150),
-      "wdth" 90,
-      "CNTR" 50;
-  }
-}
-
-/* متن‌ها */
 p, li, span {
   font-weight: var(--kahroba-wght);
   font-variation-settings:
@@ -120,13 +77,58 @@ small, .caption {
   line-height: 1.6;
 }
 
-/* تیترهای سفارشی */
+@media (min-width: 768px) {
+  h1, h2 {
+    font-size: 2.2em;
+    font-variation-settings:
+      "wght" calc(var(--kahroba-wght) + 250),
+      "wdth" 115,
+      "CNTR" 65;
+  }
+}
+
+@media (max-width: 767px) {
+  h1, h2 {
+    font-size: 1.8em;
+    font-variation-settings:
+      "wght" calc(var(--kahroba-wght) + 150),
+      "wdth" 90,
+      "CNTR" 50;
+  }
+}
+
 .section-title {
   font-weight: calc(var(--kahroba-wght) + 250);
   font-variation-settings:
     "wght" calc(var(--kahroba-wght) + 250),
     "wdth" 105,
     "CNTR" 60;
+}
+
+/* اصلاح تراز منوی ناوبری */
+.navbar-nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  height: 48px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding-block: 0;
+  line-height: 1.6;
+  font-weight: var(--kahroba-wght);
+  font-variation-settings:
+    "wght" var(--kahroba-wght),
+    "wdth" var(--kahroba-wdth),
+    "CNTR" var(--kahroba-cntr);
 }
 
 /* پشتیبانی از مرورگرهای قدیمی */
