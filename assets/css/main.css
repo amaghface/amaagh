@@ -161,3 +161,10 @@ small, .caption {
     "wdth" var(--kahroba-wdth),
     "CNTR" var(--kahroba-cntr);
 }
+
+.navbar-toggler-icon {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 24px 24px;
+  height: 100%;
+}
