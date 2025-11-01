@@ -161,3 +161,19 @@ small, .caption {
     "wdth" var(--kahroba-wdth),
     "CNTR" var(--kahroba-cntr);
 }
+
+.logo-container {
+  height: 40px;
+  max-width: 120px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .logo-container {
+    height: 32px;
+    max-width: 96px;
+  }
+}
+
