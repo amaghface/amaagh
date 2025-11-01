@@ -161,11 +161,3 @@ small, .caption {
     "wdth" var(--kahroba-wdth),
     "CNTR" var(--kahroba-cntr);
 }
-.navbar-toggler {
-  height: 40px;   /* ارتفاع */
-  width: 40px;    /* عرض */
-  padding: 4px 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
