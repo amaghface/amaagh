@@ -150,3 +150,18 @@ small, .caption {
     font-weight: 700;
   }
 }
+
+/* تراز وسط لینک‌های منو در همه حالت‌ها */
+.nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px; /* مقدار قابل تنظیم بر اساس ارتفاع هدر */
+  padding-block: 0;
+  line-height: 1.6;
+  font-weight: var(--kahroba-wght);
+  font-variation-settings:
+    "wght" var(--kahroba-wght),
+    "wdth" var(--kahroba-wdth),
+    "CNTR" var(--kahroba-cntr);
+}
