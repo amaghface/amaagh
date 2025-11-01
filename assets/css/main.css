@@ -161,16 +161,3 @@ small, .caption {
     "wdth" var(--kahroba-wdth),
     "CNTR" var(--kahroba-cntr);
 }
-
-.navbar-toggler {
-  font-family: 'Kahroba', Vazir, Tahoma, sans-serif;
-  font-size: 1rem;
-  font-weight: var(--kahroba-wght);
-  font-variation-settings:
-    "wght" var(--kahroba-wght),
-    "wdth" var(--kahroba-wdth),
-    "CNTR" var(--kahroba-cntr);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
