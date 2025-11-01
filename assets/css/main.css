@@ -34,6 +34,12 @@
   }
 }
 
+/* وسط‌چینی عمودی اجزای هدر */
+.navbar .container {
+  display: flex;
+  align-items: center;
+}
+
 /* کلاس‌های پایه */
 .text-default {
   font-weight: var(--kahroba-wght);
@@ -144,14 +150,14 @@ small, .caption {
   }
 }
 
+/* فونت منو */
 .nav-link {
   font-family: 'Kahroba', Vazir, Tahoma, sans-serif;
   font-size: 0.95em;
-  line-height: 1;
+  line-height: 1.6;
   font-weight: var(--kahroba-wght);
   font-variation-settings:
     "wght" var(--kahroba-wght),
     "wdth" var(--kahroba-wdth),
     "CNTR" var(--kahroba-cntr);
 }
-
