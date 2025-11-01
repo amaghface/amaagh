@@ -176,35 +176,3 @@ small, .caption {
     max-width: 96px;
   }
 }
-
-/* FIX: وسط‌چین هدر و همبرگر موبایل — نسخه ساده و قاطع */
-nav.navbar{ padding-top:0 !important; padding-bottom:0 !important; min-height:56px !important; box-sizing:border-box !important; }
-nav.navbar .container{ display:flex !important; align-items:center !important; gap:12px !important; }
-img.logo-container, a.navbar-brand img.logo-container{ display:inline-block !important; vertical-align:middle !important; max-height:44px !important; height:auto !important; width:auto !important; }
-nav.navbar .navbar-nav{ display:flex !important; align-items:center !important; }
-nav.navbar .nav-link{ padding-top:0.55rem !important; padding-bottom:0.55rem !important; line-height:1 !important; }
-
-/* همبرگر موبایل */
-button.navbar-toggler{ display:inline-flex !important; align-items:center !important; justify-content:center !important; padding:0.35rem !important; height:44px !important; width:44px !important; border-radius:6px !important; }
-button.navbar-toggler .navbar-toggler-icon, button.navbar-toggler svg, button.navbar-toggler i, button.navbar-toggler img{ display:block !important; line-height:1 !important; height:18px !important; width:auto !important; margin:0 auto !important; }
-
-/* FIX DESKTOP: تراز عمودی لوگو و لینک‌ها */
-nav.navbar { padding-top: 0 !important; padding-bottom: 0 !important; min-height: 64px !important; box-sizing: border-box !important; }
-nav.navbar .container { display: flex !important; align-items: center !important; gap: 16px !important; }
-
-/* چون در HTML کلاس logo-container روی img هست، هر دو حالت را پوشش می‌دهیم */
-a.navbar-brand,
-a.navbar-brand img,
-img.logo-container {
-  display: inline-flex !important;
-  align-items: center !important;
-  vertical-align: middle !important;
-  max-height: 48px !important;
-  height: auto !important;
-}
-
-/* اطمینان از تراز عمودی لینک‌های منو در دسکتاپ */
-@media (min-width: 768px) {
-  nav.navbar .navbar-nav { display: flex !important; align-items: center !important; }
-  nav.navbar .nav-link { padding-top: 0.6rem !important; padding-bottom: 0.6rem !important; line-height: 1 !important; }
-}
