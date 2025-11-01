@@ -161,3 +161,10 @@ small, .caption {
     "wdth" var(--kahroba-wdth),
     "CNTR" var(--kahroba-cntr);
 }
+
+/* وسط‌چینی آیکون دکمه منو */
+.navbar-toggler-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
