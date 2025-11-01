@@ -34,21 +34,59 @@
   }
 }
 
-body {
-  font-family: 'Kahroba', Vazir, Tahoma, sans-serif;
-  font-optical-sizing: auto;
+/* کلاس‌های پایه */
+.text-default {
   font-weight: var(--kahroba-wght);
   font-variation-settings:
     "wght" var(--kahroba-wght),
     "wdth" var(--kahroba-wdth),
     "CNTR" var(--kahroba-cntr);
+}
+
+.text-heading {
+  font-weight: calc(var(--kahroba-wght) + 250);
+  font-variation-settings:
+    "wght" calc(var(--kahroba-wght) + 250),
+    "wdth" 105,
+    "CNTR" 60;
+}
+
+.text-small {
+  font-weight: calc(var(--kahroba-wght) - 50);
+  font-variation-settings:
+    "wght" calc(var(--kahroba-wght) - 50),
+    "wdth" 90,
+    "CNTR" 35;
+}
+
+/* بدنه */
+body {
+  font-family: 'Kahroba', Vazir, Tahoma, sans-serif;
+  font-optical-sizing: auto;
   font-size: 1rem;
   line-height: 1.8;
   color: #182128;
   background-color: #ffffff;
+  font-weight: var(--kahroba-wght);
+  font-variation-settings:
+    "wght" var(--kahroba-wght),
+    "wdth" var(--kahroba-wdth),
+    "CNTR" var(--kahroba-cntr);
 }
 
-h1, h2, h3 {
+/* عناصر متنی عمومی */
+p, li, span, .nav-link {
+  font-weight: var(--kahroba-wght);
+  font-variation-settings:
+    "wght" var(--kahroba-wght),
+    "wdth" var(--kahroba-wdth),
+    "CNTR" var(--kahroba-cntr);
+  margin-bottom: 1em;
+  line-height: 1.6;
+}
+
+/* تیترها */
+h1, h2, h3, .section-title {
   font-weight: calc(var(--kahroba-wght) + 250);
   font-variation-settings:
     "wght" calc(var(--kahroba-wght) + 250),
@@ -58,25 +96,7 @@ h1, h2, h3 {
   margin-bottom: 0.8em;
 }
 
-p, li, span {
-  font-weight: var(--kahroba-wght);
-  font-variation-settings:
-    "wght" var(--kahroba-wght),
-    "wdth" var(--kahroba-wdth),
-    "CNTR" var(--kahroba-cntr);
-  margin-bottom: 1em;
-}
-
-small, .caption {
-  font-weight: calc(var(--kahroba-wght) - 50);
-  font-variation-settings:
-    "wght" calc(var(--kahroba-wght) - 50),
-    "wdth" 90,
-    "CNTR" 35;
-  font-size: 0.875rem;
-  line-height: 1.6;
-}
-
+/* سایز تیترها در دستگاه‌های مختلف */
 @media (min-width: 768px) {
   h1, h2 {
     font-size: 2.2em;
@@ -97,19 +117,22 @@ small, .caption {
   }
 }
 
-.section-title {
-  font-weight: calc(var(--kahroba-wght) + 250);
+/* متن‌های کوچک */
+small, .caption {
+  font-weight: calc(var(--kahroba-wght) - 50);
   font-variation-settings:
-    "wght" calc(var(--kahroba-wght) + 250),
-    "wdth" 105,
-    "CNTR" 60;
+    "wght" calc(var(--kahroba-wght) - 50),
+    "wdth" 90,
+    "CNTR" 35;
+  font-size: 0.875rem;
+  line-height: 1.6;
 }
 
-/* اصلاح منوی هدر: چسبیده به چپ، وسط‌چین عمودی */
+/* منوی هدر */
 .navbar-nav {
   display: flex;
   align-items: center;
-  margin-right: auto; /* در حالت rtl باعث چسبیدن به چپ می‌شود */
+  margin-right: auto;
 }
 
 .nav-item {
@@ -123,12 +146,6 @@ small, .caption {
   align-items: center;
   height: 100%;
   padding-block: 0;
-  line-height: 1.6;
-  font-weight: var(--kahroba-wght);
-  font-variation-settings:
-    "wght" var(--kahroba-wght),
-    "wdth" var(--kahroba-wdth),
-    "CNTR" var(--kahroba-cntr);
 }
 
 /* پشتیبانی از مرورگرهای قدیمی */
@@ -138,7 +155,7 @@ small, .caption {
     font-weight: 500;
   }
 
-  h1, h2, h3 {
+  h1, h2, h3, .section-title {
     font-weight: 800;
   }
 
@@ -150,9 +167,5 @@ small, .caption {
     font-weight: 500;
     padding-block: 14px;
     display: inline-block;
-  }
-
-  .section-title {
-    font-weight: 700;
   }
 }
