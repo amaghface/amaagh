@@ -163,7 +163,7 @@ small, .caption {
 }
 .navbar-toggler {
   height: 40px;   /* ارتفاع */
-  width: 36px;    /* عرض */
+  width: 40px;    /* عرض */
   padding: 4px 8px;
   display: flex;
   align-items: center;
