@@ -75,7 +75,7 @@ body {
 }
 
 /* عناصر متنی عمومی */
-p, li, span, .nav-link {
+p, li, span {
   font-weight: var(--kahroba-wght);
   font-variation-settings:
     "wght" var(--kahroba-wght),
@@ -128,26 +128,6 @@ small, .caption {
   line-height: 1.6;
 }
 
-/* منوی هدر */
-.navbar-nav {
-  display: flex;
-  align-items: center;
-  margin-right: auto;
-}
-
-.nav-item {
-  display: flex;
-  align-items: center;
-  height: 48px;
-}
-
-.nav-link {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  padding-block: 0;
-}
-
 /* پشتیبانی از مرورگرهای قدیمی */
 @supports not (font-variation-settings: "wght" 400) {
   body {
@@ -161,45 +141,5 @@ small, .caption {
 
   small, .caption {
     font-weight: 350;
-  }
-
-  .nav-link {
-    font-weight: 500;
-    padding-block: 14px;
-    display: inline-block;
-  }
-}
-
-.navbar-toggler {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  height: 48px;
-  width: 48px;
-}
-
-@media (max-width: 991px) {
-  .navbar-collapse {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background-color: var(--light);
-    width: 100%;
-    padding: 12px 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    z-index: 999;
-  }
-
-  .navbar-nav {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-  }
-
-  .nav-link {
-    padding: 6px 0;
-    text-align: right;
-    width: 100%;
   }
 }
