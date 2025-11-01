@@ -169,3 +169,37 @@ small, .caption {
     display: inline-block;
   }
 }
+
+.navbar-toggler {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  height: 48px;
+  width: 48px;
+}
+
+@media (max-width: 991px) {
+  .navbar-collapse {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: var(--light);
+    width: 100%;
+    padding: 12px 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 999;
+  }
+
+  .navbar-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .nav-link {
+    padding: 6px 0;
+    text-align: right;
+    width: 100%;
+  }
+}
