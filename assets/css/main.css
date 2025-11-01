@@ -11,7 +11,7 @@
 :root {
   --kahroba-wght: 400;
   --kahroba-wdth: 95;
-  --kahroba-cntr: 50; /* اصلاح‌شده برای تعادل بصری */
+  --kahroba-cntr: 50;
 }
 
 @media (prefers-contrast: more) {
@@ -105,30 +105,30 @@ small, .caption {
     "CNTR" 60;
 }
 
-/* اصلاح تراز منوی ناوبری */
+/* اصلاح تراز منوی ناوبری با !important */
 .navbar-nav {
-  display: flex;
-  align-items: center;
+  display: flex !important;
+  align-items: center !important;
 }
 
 .nav-item {
-  display: flex;
-  align-items: center;
-  height: 48px;
+  display: flex !important;
+  align-items: center !important;
+  height: 48px !important;
 }
 
 .nav-link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  padding-block: 0;
-  line-height: 1.6;
-  font-weight: var(--kahroba-wght);
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100% !important;
+  padding-block: 0 !important;
+  line-height: 1.6 !important;
+  font-weight: var(--kahroba-wght) !important;
   font-variation-settings:
     "wght" var(--kahroba-wght),
     "wdth" var(--kahroba-wdth),
-    "CNTR" var(--kahroba-cntr);
+    "CNTR" var(--kahroba-cntr) !important;
 }
 
 /* پشتیبانی از مرورگرهای قدیمی */
