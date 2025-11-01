@@ -177,3 +177,67 @@ small, .caption {
   }
 }
 
+/* --- همسان‌سازی ارتفاع هدر و وسط‌چین محتوا --- */
+.navbar {
+  padding-top: 0;
+  padding-bottom: 0;
+  min-height: 56px;
+  box-sizing: border-box;
+}
+
+/* اطمینان از فلکس بودن کانتینر داخلی و تراز عمودی */
+.navbar .container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* لوگو به‌عنوان فلکس آیتم و ارتفاع هماهنگ */
+.logo-container {
+  display: inline-flex;
+  align-items: center;
+  height: 56px;
+}
+
+/* تنظیم اندازه تصویر لوگو داخل کانتینر */
+.logo-container img {
+  max-height: 44px;
+  height: auto;
+  width: auto;
+  display: block;
+}
+
+/* منوی لینک‌ها را هم وسط‌چین کن */
+.navbar .navbar-nav {
+  display: flex;
+  align-items: center;
+}
+
+/* لینک‌ها padding عمودی مشخص داشته باشند تا تقارن حفظ شود */
+.navbar .nav-link {
+  padding-top: 0.55rem;
+  padding-bottom: 0.55rem;
+  line-height: 1;
+}
+
+/* --- وسط‌چین آیکون همبرگر در موبایل --- */
+.navbar-toggler {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem;
+  height: 44px;
+  width: 44px;
+  border-radius: 6px;
+}
+
+/* آیکون داخل دکمه را بلاک کن تا دقیق وسط قرار گیرد */
+.navbar-toggler .navbar-toggler-icon,
+.navbar-toggler svg,
+.navbar-toggler i {
+  display: block;
+  line-height: 1;
+  height: 18px;
+  width: auto;
+}
+
