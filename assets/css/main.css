@@ -11,21 +11,21 @@
 :root {
   --kahroba-wght: 400;
   --kahroba-wdth: 95;
-  --kahroba-cntr: 45;
+  --kahroba-cntr: 50; /* اصلاح‌شده از 45 به 50 برای تعادل بصری */
 }
 
 /* تطبیق با تنظیمات کاربر */
 @media (prefers-contrast: more) {
   :root {
     --kahroba-wght: 550;
-    --kahroba-cntr: 75;
+    --kahroba-cntr: 65; /* اصلاح‌شده از 75 به 65 برای جلوگیری از تمایل به بالا */
   }
 }
 
 @media (prefers-contrast: less) {
   :root {
     --kahroba-wght: 350;
-    --kahroba-cntr: 30;
+    --kahroba-cntr: 35;
   }
 }
 
@@ -56,7 +56,7 @@ h1, h2, h3 {
   font-variation-settings:
     "wght" calc(var(--kahroba-wght) + 250),
     "wdth" 105,
-    "CNTR" 65;
+    "CNTR" 60; /* اصلاح‌شده از 65 به 60 برای تراز بهتر */
   line-height: 1.3;
   margin-bottom: 0.8em;
 }
@@ -89,7 +89,7 @@ small, .caption {
     font-variation-settings:
       "wght" calc(var(--kahroba-wght) + 250),
       "wdth" 115,
-      "CNTR" 75;
+      "CNTR" 65; /* اصلاح‌شده از 75 به 65 */
   }
 }
 
@@ -100,7 +100,7 @@ small, .caption {
     font-variation-settings:
       "wght" calc(var(--kahroba-wght) + 150),
       "wdth" 90,
-      "CNTR" 55;
+      "CNTR" 50; /* اصلاح‌شده از 55 به 50 */
   }
 }
 
@@ -110,7 +110,7 @@ small, .caption {
   font-variation-settings:
     "wght" calc(var(--kahroba-wght) + 250),
     "wdth" 105,
-    "CNTR" 65;
+    "CNTR" 60; /* اصلاح‌شده از 65 به 60 */
 }
 
 /* اصلاح فاصله منوی ناوبری */
