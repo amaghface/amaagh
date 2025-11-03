@@ -176,3 +176,18 @@ small, .caption {
     max-width: 96px;
   }
 }
+
+/* نشان ندادن کادر سفید در موبایل */
+html, body {
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.row {
+  margin-right: 0;
+  margin-left: 0;
+}
