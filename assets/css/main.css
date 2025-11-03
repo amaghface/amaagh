@@ -235,3 +235,24 @@ img {
   white-space: nowrap;
   border: 0;
 }
+
+/* تنظیم فونت کهربا برای موبایل */
+@media (max-width: 767px) {
+  :root {
+    --kahroba-wdth: 85;
+  }
+
+  body {
+    font-size: 0.625rem; /* کاهش حدود 40٪ از 1rem */
+    line-height: 1.6;
+  }
+
+  p, li, span {
+    font-size: 0.625rem;
+    line-height: 1.5;
+  }
+
+  .hero-banner {
+    background-size: 100% auto !important; /* جلوگیری از کراپ در Firefox موبایل */
+  }
+}
