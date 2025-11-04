@@ -303,4 +303,9 @@ img {
     z-index: 1;
     position: relative;
   }
+  @supports (-moz-user-select: none) {
+  .hero-banner {
+    background-size: 100% auto !important;
+  }
 }
+
