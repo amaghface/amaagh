@@ -255,4 +255,19 @@ img {
   .hero-banner {
     background-size: 100% auto !important; /* جلوگیری از کراپ در Firefox موبایل */
   }
-}
+@media (max-width: 767px) {
+  .hero-banner {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    background-position: top center !important;
+    background-size: cover !important;
+  }
+
+  .navbar {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .navbar + .hero-banner {
+    margin-top: -3px !important; /* هم‌پوشانی با خط زیر هدر */
+  }
