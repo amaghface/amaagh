@@ -276,5 +276,15 @@ img {
   .navbar {
     border-bottom: 3px solid #7a6538 !important;
   }
-}
+@media (max-width: 767px) {
+  .navbar {
+    border-bottom: 3px solid #7a6538 !important;
+    z-index: 2;
+    position: relative;
+  }
 
+  .hero-banner {
+    z-index: 1;
+    position: relative;
+  }
+}
