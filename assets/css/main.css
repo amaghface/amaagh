@@ -271,3 +271,10 @@ img {
   .navbar + .hero-banner {
     margin-top: -3px !important; /* هم‌پوشانی با خط زیر هدر */
   }
+
+  @media (max-width: 767px) {
+  .navbar {
+    border-bottom: 3px solid #7a6538 !important;
+  }
+}
+
