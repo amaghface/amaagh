@@ -267,23 +267,24 @@ img {
     margin-bottom: 0 !important;
     padding-bottom: 0 !important;
   }
+.navbar + .hero-banner {
+  margin-top: -3px !important; /* هم‌پوشانی با خط زیر هدر */
+}
 
-  .navbar + .hero-banner {
-    margin-top: -3px !important; /* هم‌پوشانی با خط زیر هدر */
-  }
-
-  @media (max-width: 767px) {
-  .navbar {
-    border-bottom: 3px solid #7a6538 !important;
-  }
 @media (max-width: 767px) {
   .navbar {
     border-bottom: 3px solid #7a6538 !important;
     z-index: 2;
     position: relative;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
   }
 
   .hero-banner {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    background-position: top center !important;
+    background-size: cover !important;
     z-index: 1;
     position: relative;
   }
