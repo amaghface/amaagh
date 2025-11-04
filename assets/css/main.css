@@ -252,15 +252,26 @@ img {
     line-height: 1.5;
   }
 
-  .hero-banner {
-    background-size: 100% auto !important; /* جلوگیری از کراپ در Firefox موبایل */
-  }
 @media (max-width: 767px) {
   .hero-banner {
     margin-top: 0 !important;
     padding-top: 0 !important;
     background-position: top center !important;
-    background-size: cover !important;
+    background-size: 100% auto !important; /* جلوگیری از کراپ در Firefox موبایل */
+    position: relative;
+    z-index: 1;
+  }
+
+  .navbar {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    border-bottom: 3px solid #7a6538 !important;
+    position: relative;
+    z-index: 2;
+  }
+
+  .navbar + .hero-banner {
+    margin-top: -3px !important; /* هم‌پوشانی با خط زیر هدر */
   }
 
   .navbar {
