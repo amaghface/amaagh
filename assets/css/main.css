@@ -280,6 +280,10 @@ img {
     padding-bottom: 0 !important;
   }
 
+  .navbar + .hero-banner {
+    margin-top: -3px !important;
+  }
+
   .hero-banner {
     margin-top: 0 !important;
     padding-top: 0 !important;
