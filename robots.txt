@@ -2,7 +2,7 @@ Sitemap: https://amaagh.ir/sitemap.xml
 
 User-agent: *
 Disallow: /archive
-Disallow: /tag/اعماق
+Disallow: /tag
 Disallow: /cdn-cgi/
 Allow: /index.html
 Allow: /about
