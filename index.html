@@ -484,62 +484,57 @@
 
 
 
-    <section id="form" class="form-section">
+<section id="form" class="form-section">
   <div class="form-container">
     <h2 class="section-title text-center">فرم درخواست بررسی اثر</h2>
     <p class="text-center mb-4">
       نشر اعماق آمادۀ دریافت آثار شما در حوزه‌های ادبیات، علوم انسانی و هنر می‌باشد. از طریق این فرم اطلاعات درخواستی را ثبت کنید تا در اولین فرصت با شما تماس برقرار کنیم. پاسخ درخواست شما در کم‌تر از یک هفته از راه رایانامه برای شما فرستاده خواهد شد.
     </p>
 
-    <div class="success-message" id="successMessage" style="display: none;">
-      درخواست شما با موفقیت ارسال شد
-    </div>
-
-    <!-- فرم اصلی -->
-    <form action="https://formbold.com/s/3qnNm" 
+    <form action="https://getform.io/f/ayvqpqxb" 
           method="POST" 
           enctype="multipart/form-data" 
           id="submissionForm">
 
-      <!-- تنظیمات مخفی -->
-      <input type="hidden" name="_redirect" value="https://amaagh.ir/success">
+      <!-- ضداسپم -->
+      <input type="hidden" name="_gotcha" style="display:none !important">
 
       <div class="form-row">
         <div class="form-group">
           <label class="form-label required">نام و نام خانوادگی</label>
-          <input type="text" class="form-control" name="نام و نام خانوادگی" required>
+          <input type="text" class="form-control" name="full-name" required>
         </div>
         <div class="form-group">
           <label class="form-label required">نام کتاب</label>
-          <input type="text" class="form-control" name="نام کتاب" required>
+          <input type="text" class="form-control" name="book-name" required>
         </div>
       </div>
 
       <div class="form-group">
         <label class="form-label required">موضوع کتاب</label>
-        <input type="text" class="form-control" name="موضوع کتاب" required>
+        <input type="text" class="form-control" name="book-subject" required>
       </div>
 
       <div class="form-group">
         <label class="form-label">توضیح کوتاه درمورد اثر</label>
-        <textarea class="form-control" name="توضیحات کتاب" rows="3"></textarea>
+        <textarea class="form-control" name="book-description" rows="3"></textarea>
       </div>
 
       <div class="form-row">
         <div class="form-group">
           <label class="form-label">شماره تماس واتساپی <span class="form-note">(برای جلسه آنلاین)</span></label>
-          <input type="tel" class="form-control" name="شماره تماس">
+          <input type="tel" class="form-control" name="phone">
         </div>
         <div class="form-group">
           <label class="form-label required">ایمیل <span class="form-note">(جلسه آنلاین در Google Meet)</span></label>
-          <input type="email" class="form-control" name="ایمیل" required>
+          <input type="email" class="form-control" name="email" required>
         </div>
       </div>
 
       <div class="form-group">
         <label class="form-label">بارگذاری فایل <span class="form-note">(حداکثر 20 مگابایت - قالب‌های PDF, Word)</span></label>
-        <input type="file" class="form-control" name="فایل پیوستی" accept=".pdf,.doc,.docx" id="fileUpload">
-        
+        <input type="file" class="form-control" name="file" accept=".pdf,.doc,.docx" id="fileUpload">
+
         <!-- نوار پیشرفت -->
         <progress id="uploadProgress" value="0" max="100" style="width:100%; display:none;"></progress>
         <div id="progressText" style="text-align:center; font-size:14px; margin-top:5px;"></div>
@@ -552,9 +547,9 @@
 
 <script>
   const form = document.getElementById('submissionForm');
-  const fileInput = document.getElementById('fileUpload');
   const progressBar = document.getElementById('uploadProgress');
   const progressText = document.getElementById('progressText');
+  const successUrl = 'https://amaagh.ir/success';
 
   form.addEventListener('submit', function(e) {
     e.preventDefault();
@@ -563,6 +558,7 @@
     const xhr = new XMLHttpRequest();
 
     xhr.open('POST', form.action, true);
+    xhr.setRequestHeader('Accept', 'application/json');
 
     // نمایش درصد آپلود
     xhr.upload.onprogress = function(event) {
@@ -574,19 +570,25 @@
       }
     };
 
-    // بعد از تکمیل
-    xhr.onload = function() {
-      if (xhr.status === 200) {
-        window.location.href = form.querySelector('input[name="_redirect"]').value;
-      } else {
-        alert('خطا در ارسال فرم');
+    xhr.upload.onloadend = function() {
+      progressBar.value = 100;
+      progressText.textContent = '100% آپلود شد';
+    };
+
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4) {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          window.location.href = successUrl;
+        } else {
+          alert('خطا در ارسال فرم. لطفاً دوباره تلاش کنید.');
+        }
       }
     };
 
     xhr.send(formData);
   });
 </script>
-
+    
     
 
 
