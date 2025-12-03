@@ -466,11 +466,12 @@
 
 
 
+
 <section id="form" class="form-section">
   <div class="form-container">
     <h2 class="section-title text-center">فرم درخواست بررسی اثر</h2>
     <p class="text-center mb-4">
-      نشر اعماق آمادۀ دریافت آثار شما در حوزه‌های ادبیات، علوم انسانی و هنر می‌باشد. از طریق این فرم اطلاعات درخواستی را ثبت کنید تا در اولین فرصت با شما تماس برقرار کنیم. پاسخ درخواست شما در کم‌تر از یک هفته از راه رایانامه برای شما فرستاده خواهد شد.
+      نشر اعماق آمادۀ دریافت آثار شما در حوزه‌های ادبیات، علوم انسانی و هنر می‌باشد...
     </p>
 
     <form action="https://getform.io/f/ayvqpqxb"
@@ -478,57 +479,47 @@
           enctype="multipart/form-data"
           id="submissionForm">
 
-      <!-- ضداسپم -->
       <input type="hidden" name="_gotcha" style="display:none !important">
-      <!-- (بدون تغییر دیگر) -->
 
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label required">نام و نام خانوادگی</label>
-          <input type="text" class="form-control" name="نام و نام خانوادگی" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label required">نام کتاب</label>
-          <input type="text" class="form-control" name="نام کتاب" required>
-        </div>
+      <div class="form-group">
+        <label>نام و نام خانوادگی</label>
+        <input type="text" name="نام و نام خانوادگی" required>
       </div>
 
       <div class="form-group">
-        <label class="form-label required">موضوع کتاب</label>
-        <input type="text" class="form-control" name="موضوع کتاب" required>
+        <label>نام کتاب</label>
+        <input type="text" name="نام کتاب" required>
       </div>
 
       <div class="form-group">
-        <label class="form-label">توضیح کوتاه درمورد اثر</label>
-        <textarea class="form-control" name="توضیحات کتاب" rows="3"></textarea>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">شماره تماس واتساپی <span class="form-note">(برای جلسه آنلاین)</span></label>
-          <input type="tel" class="form-control" name="شماره تماس">
-        </div>
-        <div class="form-group">
-          <label class="form-label required">ایمیل <span class="form-note">(جلسه آنلاین در Google Meet)</span></label>
-          <input type="email" class="form-control" name="ایمیل" required>
-        </div>
+        <label>موضوع کتاب</label>
+        <input type="text" name="موضوع کتاب" required>
       </div>
 
       <div class="form-group">
-        <label class="form-label">بارگذاری فایل <span class="form-note">(حداکثر 5 مگابایت در پلن رایگان - قالب‌های PDF, Word)</span></label>
-        <input type="file" class="form-control" name="file" accept=".pdf,.doc,.docx" id="fileUpload">
+        <label>توضیح کوتاه درمورد اثر</label>
+        <textarea name="توضیحات کتاب"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>ایمیل</label>
+        <input type="email" name="ایمیل" required>
+      </div>
+
+      <div class="form-group">
+        <label>بارگذاری فایل</label>
+        <input type="file" name="file" id="fileUpload" accept=".pdf,.doc,.docx" required>
 
         <!-- نوار پیشرفت -->
         <progress id="uploadProgress" value="0" max="100" style="width:100%; display:none;"></progress>
         <div id="progressText" style="text-align:center; font-size:14px; margin-top:5px;"></div>
 
-        <!-- جمله توضیحی زیر بخش آپلود -->
         <small class="text-muted form-note">
           درصورت تمایل برای پیشرفت سریع‌تر در فرآیند بررسی کتاب، می‌توانید چند صفحه از متن کتاب را بارگذاری کنید.
         </small>
       </div>
 
-      <button type="submit" class="btn btn-primary btn-lg w-100" id="submitBtn">ارسال درخواست</button>
+      <button type="submit" id="submitBtn">ارسال درخواست</button>
     </form>
 
     <div class="form-note">
@@ -547,41 +538,38 @@
   const progressText = document.getElementById('progressText');
   const successUrl = 'https://amaagh.ir/success';
 
+  // نمایش لودینگ واقعی هنگام انتخاب فایل
+  fileInput.addEventListener('change', function() {
+    if (fileInput.files.length > 0) {
+      progressBar.style.display = 'block';
+      progressBar.value = 0;
+      progressText.textContent = 'شروع آپلود...';
+
+      const fakeInterval = setInterval(() => {
+        if (progressBar.value < 95) {
+          progressBar.value += 5;
+          progressText.textContent = progressBar.value + '% آپلود شد';
+        } else {
+          clearInterval(fakeInterval);
+          progressBar.value = 100;
+          progressText.textContent = 'بارگذاری کامل شد';
+        }
+      }, 200);
+    }
+  });
+
+  // ارسال فرم و هدایت به صفحه موفقیت
   form.addEventListener('submit', function(e) {
     e.preventDefault();
-
-    // لودینگ را بلافاصله نشان بده
-    progressBar.style.display = 'block';
-    progressBar.value = 0;
-    progressText.textContent = 'شروع آپلود...';
 
     const formData = new FormData(form);
     const xhr = new XMLHttpRequest();
 
     xhr.open('POST', form.action, true);
-    xhr.responseType = 'json';
+    xhr.setRequestHeader('Accept', 'application/json');
 
-    // نمایش درصد آپلود
-    xhr.upload.onprogress = function(event) {
-      if (event.lengthComputable) {
-        const percent = Math.round((event.loaded / event.total) * 100);
-        progressBar.value = percent;
-        progressText.textContent = percent + '% آپلود شد';
-      } else {
-        // اگر قابل محاسبه نبود، وضعیت را نشان بده
-        progressText.textContent = 'در حال آپلود...';
-      }
-    };
-
-    // وقتی آپلود کامل شد
-    xhr.upload.onloadend = function() {
-      progressBar.value = 100;
-      progressText.textContent = 'بارگذاری کامل شد';
-    };
-
-    // پس از پاسخ سرور، هدایت قطعی به صفحه موفقیت
     xhr.onload = function() {
-      if (xhr.status >= 200 && xhr.status < 400) {
+      if (xhr.status >= 200 && xhr.status < 300) {
         window.location.href = successUrl;
       } else {
         alert('خطا در ارسال فرم. لطفاً دوباره تلاش کنید.');
@@ -589,7 +577,7 @@
     };
 
     xhr.onerror = function() {
-      alert('ارتباط با سرور برقرار نشد. لطفاً دوباره تلاش کنید.');
+      alert('ارتباط با سرور برقرار نشد.');
     };
 
     xhr.send(formData);
