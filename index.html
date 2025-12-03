@@ -480,6 +480,7 @@
 
       <!-- ضداسپم -->
       <input type="hidden" name="_gotcha" style="display:none !important">
+      <!-- (بدون تغییر دیگر) -->
 
       <div class="form-row">
         <div class="form-group">
@@ -549,19 +550,26 @@
   form.addEventListener('submit', function(e) {
     e.preventDefault();
 
+    // لودینگ را بلافاصله نشان بده
+    progressBar.style.display = 'block';
+    progressBar.value = 0;
+    progressText.textContent = 'شروع آپلود...';
+
     const formData = new FormData(form);
     const xhr = new XMLHttpRequest();
 
     xhr.open('POST', form.action, true);
-    xhr.setRequestHeader('Accept', 'application/json');
+    xhr.responseType = 'json';
 
     // نمایش درصد آپلود
     xhr.upload.onprogress = function(event) {
       if (event.lengthComputable) {
         const percent = Math.round((event.loaded / event.total) * 100);
-        progressBar.style.display = 'block';
         progressBar.value = percent;
         progressText.textContent = percent + '% آپلود شد';
+      } else {
+        // اگر قابل محاسبه نبود، وضعیت را نشان بده
+        progressText.textContent = 'در حال آپلود...';
       }
     };
 
@@ -571,20 +579,23 @@
       progressText.textContent = 'بارگذاری کامل شد';
     };
 
-    // بعد از ارسال موفق، هدایت به صفحه موفقیت
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === 4) {
-        if (xhr.status >= 200 && xhr.status < 300) {
-          window.location.href = successUrl;
-        } else {
-          alert('خطا در ارسال فرم. لطفاً دوباره تلاش کنید.');
-        }
+    // پس از پاسخ سرور، هدایت قطعی به صفحه موفقیت
+    xhr.onload = function() {
+      if (xhr.status >= 200 && xhr.status < 400) {
+        window.location.href = successUrl;
+      } else {
+        alert('خطا در ارسال فرم. لطفاً دوباره تلاش کنید.');
       }
+    };
+
+    xhr.onerror = function() {
+      alert('ارتباط با سرور برقرار نشد. لطفاً دوباره تلاش کنید.');
     };
 
     xhr.send(formData);
   });
 </script>
+
 
 
 
