@@ -466,7 +466,7 @@
 
 
 
-    <section id="form" class="form-section">
+<section id="form" class="form-section">
   <div class="form-container">
     <h2 class="section-title text-center">فرم درخواست بررسی اثر</h2>
     <p class="text-center mb-4">
@@ -565,11 +565,13 @@
       }
     };
 
+    // وقتی آپلود کامل شد
     xhr.upload.onloadend = function() {
       progressBar.value = 100;
       progressText.textContent = 'بارگذاری کامل شد';
     };
 
+    // بعد از ارسال موفق، هدایت به صفحه موفقیت
     xhr.onreadystatechange = function() {
       if (xhr.readyState === 4) {
         if (xhr.status >= 200 && xhr.status < 300) {
@@ -583,6 +585,7 @@
     xhr.send(formData);
   });
 </script>
+
 
 
     
