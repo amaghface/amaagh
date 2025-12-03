@@ -465,6 +465,7 @@
 
 
 
+
     <section id="form" class="form-section">
   <div class="form-container">
     <h2 class="section-title text-center">فرم درخواست بررسی اثر</h2>
@@ -472,15 +473,13 @@
       نشر اعماق آمادۀ دریافت آثار شما در حوزه‌های ادبیات، علوم انسانی و هنر می‌باشد. از طریق این فرم اطلاعات درخواستی را ثبت کنید تا در اولین فرصت با شما تماس برقرار کنیم. پاسخ درخواست شما در کم‌تر از یک هفته از راه رایانامه برای شما فرستاده خواهد شد.
     </p>
 
-    <!-- فرم اصلی (بدون جاوااسکریپتِ ارسال؛ سازگار با Getform) -->
     <form action="https://getform.io/f/ayvqpqxb"
           method="POST"
-          enctype="multipart/form-data">
+          enctype="multipart/form-data"
+          id="submissionForm">
 
       <!-- ضداسپم -->
       <input type="hidden" name="_gotcha" style="display:none !important">
-      <!-- هدایت به صفحه موفقیت -->
-      <input type="hidden" name="_redirect" value="https://amaagh.ir/success">
 
       <div class="form-row">
         <div class="form-group">
@@ -515,24 +514,21 @@
       </div>
 
       <div class="form-group">
-        <label class="form-label">بارگذاری فایل <span class="form-note">(حداکثر 20 مگابایت - قالب‌های PDF, Word)</span></label>
-        <!-- برای سازگاری با Getform نام فیلد فایل را «file» گذاشتم -->
+        <label class="form-label">بارگذاری فایل <span class="form-note">(حداکثر 5 مگابایت در پلن رایگان - قالب‌های PDF, Word)</span></label>
         <input type="file" class="form-control" name="file" accept=".pdf,.doc,.docx" id="fileUpload">
 
-        <!-- نوار پیشرفت نمایشی (بدون دخالت در ارسال) -->
+        <!-- نوار پیشرفت -->
         <progress id="uploadProgress" value="0" max="100" style="width:100%; display:none;"></progress>
         <div id="progressText" style="text-align:center; font-size:14px; margin-top:5px;"></div>
+
+        <!-- جمله توضیحی زیر بخش آپلود -->
+        <small class="text-muted form-note">
+          درصورت تمایل برای پیشرفت سریع‌تر در فرآیند بررسی کتاب، می‌توانید چند صفحه از متن کتاب را بارگذاری کنید.
+        </small>
       </div>
 
       <button type="submit" class="btn btn-primary btn-lg w-100" id="submitBtn">ارسال درخواست</button>
     </form>
-
-    <!-- متن‌های توضیحیِ زیر فرم (به همان جای قبلی برگشته‌اند) -->
-    <div class="form-note">
-      <small class="text-muted form-note">
-        درصورت تمایل برای پیشرفت سریع‌تر در فرآیند بررسی کتاب، می‌توانید چند صفحه از متن کتاب را بارگذاری کنید.
-      </small>
-    </div>
 
     <div class="form-note">
       <p class="text-muted">
@@ -544,37 +540,50 @@
 </section>
 
 <script>
-  // نمایش گرافیکی ساده هنگام انتخاب فایل (بدون تغییر در فرآیند ارسال استاندارد)
+  const form = document.getElementById('submissionForm');
   const fileInput = document.getElementById('fileUpload');
   const progressBar = document.getElementById('uploadProgress');
   const progressText = document.getElementById('progressText');
+  const successUrl = 'https://amaagh.ir/success';
 
-  fileInput.addEventListener('change', function() {
-    if (fileInput.files && fileInput.files.length > 0) {
-      // شروع نمایش نوار پیشرفت به صورت نمایشی
-      progressBar.style.display = 'block';
-      progressBar.value = 0;
-      progressText.textContent = 'آماده‌سازی برای آپلود...';
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
 
-      // چون ارسال به‌صورت استاندارد HTML انجام می‌شود،
-      // پیشرفت دقیق آپلود قابل‌گزارش نیست؛ برای تجربهٔ کاربری بهتر
-      // یک پیشرفت نمایشی کوتاه انجام می‌دهیم.
-      let val = 0;
-      const interval = setInterval(() => {
-        val += 5;
-        progressBar.value = val;
-        progressText.textContent = val + '% آماده‌سازی';
-        if (val >= 95) {
-          clearInterval(interval);
-          progressText.textContent = 'در حال ارسال...';
+    const formData = new FormData(form);
+    const xhr = new XMLHttpRequest();
+
+    xhr.open('POST', form.action, true);
+    xhr.setRequestHeader('Accept', 'application/json');
+
+    // نمایش درصد آپلود
+    xhr.upload.onprogress = function(event) {
+      if (event.lengthComputable) {
+        const percent = Math.round((event.loaded / event.total) * 100);
+        progressBar.style.display = 'block';
+        progressBar.value = percent;
+        progressText.textContent = percent + '% آپلود شد';
+      }
+    };
+
+    xhr.upload.onloadend = function() {
+      progressBar.value = 100;
+      progressText.textContent = 'بارگذاری کامل شد';
+    };
+
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4) {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          window.location.href = successUrl;
+        } else {
+          alert('خطا در ارسال فرم. لطفاً دوباره تلاش کنید.');
         }
-      }, 80);
-    } else {
-      progressBar.style.display = 'none';
-      progressText.textContent = '';
-    }
+      }
+    };
+
+    xhr.send(formData);
   });
 </script>
+
 
     
     
