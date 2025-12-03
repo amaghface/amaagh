@@ -483,6 +483,113 @@
 </script>
 
 
+
+    <section id="form" class="form-section">
+  <div class="form-container">
+    <h2 class="section-title text-center">فرم درخواست بررسی اثر</h2>
+    <p class="text-center mb-4">
+      نشر اعماق آمادۀ دریافت آثار شما در حوزه‌های ادبیات، علوم انسانی و هنر می‌باشد. از طریق این فرم اطلاعات درخواستی را ثبت کنید تا در اولین فرصت با شما تماس برقرار کنیم. پاسخ درخواست شما در کم‌تر از یک هفته از راه رایانامه برای شما فرستاده خواهد شد.
+    </p>
+
+    <div class="success-message" id="successMessage" style="display: none;">
+      درخواست شما با موفقیت ارسال شد
+    </div>
+
+    <!-- فرم اصلی -->
+    <form action="https://formbold.com/s/3qnNm" 
+          method="POST" 
+          enctype="multipart/form-data" 
+          id="submissionForm">
+
+      <!-- تنظیمات مخفی -->
+      <input type="hidden" name="_redirect" value="https://amaagh.ir/success">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label required">نام و نام خانوادگی</label>
+          <input type="text" class="form-control" name="نام و نام خانوادگی" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label required">نام کتاب</label>
+          <input type="text" class="form-control" name="نام کتاب" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label required">موضوع کتاب</label>
+        <input type="text" class="form-control" name="موضوع کتاب" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">توضیح کوتاه درمورد اثر</label>
+        <textarea class="form-control" name="توضیحات کتاب" rows="3"></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">شماره تماس واتساپی <span class="form-note">(برای جلسه آنلاین)</span></label>
+          <input type="tel" class="form-control" name="شماره تماس">
+        </div>
+        <div class="form-group">
+          <label class="form-label required">ایمیل <span class="form-note">(جلسه آنلاین در Google Meet)</span></label>
+          <input type="email" class="form-control" name="ایمیل" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">بارگذاری فایل <span class="form-note">(حداکثر 20 مگابایت - قالب‌های PDF, Word)</span></label>
+        <input type="file" class="form-control" name="فایل پیوستی" accept=".pdf,.doc,.docx" id="fileUpload">
+        
+        <!-- نوار پیشرفت -->
+        <progress id="uploadProgress" value="0" max="100" style="width:100%; display:none;"></progress>
+        <div id="progressText" style="text-align:center; font-size:14px; margin-top:5px;"></div>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-lg w-100" id="submitBtn">ارسال درخواست</button>
+    </form>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('submissionForm');
+  const fileInput = document.getElementById('fileUpload');
+  const progressBar = document.getElementById('uploadProgress');
+  const progressText = document.getElementById('progressText');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const xhr = new XMLHttpRequest();
+
+    xhr.open('POST', form.action, true);
+
+    // نمایش درصد آپلود
+    xhr.upload.onprogress = function(event) {
+      if (event.lengthComputable) {
+        const percent = Math.round((event.loaded / event.total) * 100);
+        progressBar.style.display = 'block';
+        progressBar.value = percent;
+        progressText.textContent = percent + '% آپلود شد';
+      }
+    };
+
+    // بعد از تکمیل
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        window.location.href = form.querySelector('input[name="_redirect"]').value;
+      } else {
+        alert('خطا در ارسال فرم');
+      }
+    };
+
+    xhr.send(formData);
+  });
+</script>
+
+    
+
+
     <footer class="footer">
         <div class="container">
             <div class="footer-text-box">
